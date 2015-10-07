@@ -12,11 +12,29 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <title>gradecalc</title>
+
+  <script>
+  function calcluateGrades() {
+    var mark1 = parseInt($("#mark1").val());
+    var grade1 = parseInt($("#grade1").val());
+    var mark2 = parseInt($("#mark2").val());
+    var grade2 = parseInt($("#grade2").val());
+
+
+    var finalMark = ((mark1 * (grade1/100)) + (mark2 * (grade2/100))).toFixed(1);
+
+
+
+
+    $("#finalGrade").html(finalMark + "%");
+  }
+  </script>
+
 </head>
 <body>
   <h1> Welcome to gradecalc! </h1>
   <p> Please input your grades below </p>
-  <div id="the-grades">
+  <div id="the-grades" >
     <table>
       <tr>
         <th>Your grade</th>
@@ -24,53 +42,55 @@
       </tr>
       <tr>
         <td>
-          <input type="text" maxlength="8" size="9" placeholder="ex 22/30">
+          <input type="text" id="mark1" maxlength="8" size="10" placeholder="ex 22/30">
         </td>
         <td>
-          <input type="text" maxlength="8" size="9" placeholder="ex 50">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" maxlength="8" size="9">
-        </td>
-        <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="grade1" maxlength="8" size="10" placeholder="ex 50">
         </td>
       </tr>
       <tr>
         <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="mark2" maxlength="8" size="10">
         </td>
         <td>
-          <input type="text" maxlength="8" size="9">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" maxlength="8" size="9">
-        </td>
-        <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="grade2" maxlength="8" size="10">
         </td>
       </tr>
       <tr>
         <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="mark3" maxlength="8" size="10">
         </td>
         <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="grade3" maxlength="8" size="10">
         </td>
       </tr>
       <tr>
         <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="mark4" maxlength="8" size="10">
         </td>
         <td>
-          <input type="text" maxlength="8" size="9">
+          <input type="text" id="grade4" maxlength="8" size="10">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="mark5" maxlength="8" size="10">
+        </td>
+        <td>
+          <input type="text" id="grade5" maxlength="8" size="10">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="mark6" maxlength="8" size="10">
+        </td>
+        <td>
+          <input type="text" id="grade6" maxlength="8" size="10">
         </td>
       </tr>
     </table>
   </div>
+  <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default">What's my mark?</button>
+  <div id="finalGrade"> </div>
 </body>
 </html>

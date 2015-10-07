@@ -75,6 +75,23 @@ mark {
   background: #ff0;
   color: #000;
 }
+
+#centerMe {
+  position:absolute;
+  width:300px;
+  height:200px;
+  z-index:15;
+  top:50%;
+  left:50%;
+  margin:-100px 0 0 -150px;
+}
+
+#finalGrade {
+  font-size: 250%;
+  position:absolute;
+  left:50%;
+}
+
 small {
   font-size: 80%;
 }
@@ -195,6 +212,7 @@ td,
 th {
   padding: 0;
 }
+
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   *,
