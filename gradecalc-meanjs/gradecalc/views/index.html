@@ -25,9 +25,13 @@
   }
   function getMarks() {
     var arrayOfMarks = $(".marks");
-    console.log(arrayOfMarks[0].value);
+    $.each(arrayOfMarks , function(index, value){
+     console.log(index + ':' + value);
+    });
+  /*  console.log(arrayOfMarks[0].value);
     console.log(arrayOfMarks[1].value);
     console.log(arrayOfMarks[2].value);
+    */
   }
 
   </script>
