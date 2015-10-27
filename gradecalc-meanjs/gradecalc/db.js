@@ -1,50 +1,33 @@
-//lets require/import the mongodb native drivers.
-var mongodb = require('mongodb');
+//Lets load the mongoose module in our program
+var mongoose = require('mongoose');
 
-//We need to work with "MongoClient" interface in order to connect to a mongodb server.
-var MongoClient = mongodb.MongoClient;
+//Lets connect to our database using the DB server URL.
+mongoose.connect('mongodb://localhost/gradecalc');
 
-// Connection URL. This is where your mongodb server is running.
-var url = 'mongodb://localhost:27017/gradecalc';
+/**
+ * Lets define our Model for User entity. This model represents a collection in the database.
+ * We define the possible schema of User document and data types of each field.
+ * */
+var User = mongoose.model('User', {email: String, classes: Array});
 
-// Use connect method to connect to the Server
-MongoClient.connect(url, function (err, db) {
+/**
+ * Lets Use our Models
+ * */
+
+//Lets create a new user
+var user1 = new User({email: 'testemail@some.com', classes: ['COMP1000', 'WYMN1000']});
+
+//Some modifications in user object
+user1.name = user1.email.toUpperCase();
+
+//Lets try to print and see it. You will see _id is assigned.
+console.log("Bang: " + user1);
+
+//Lets save it
+user1.save(function (err, userObj) {
   if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
+    console.log(err);
   } else {
-    //HURRAY!! We are connected. :)
-    console.log('Connection established to', url);
-
-    // Get the documents collection
-    var collection = db.collection('users');
-
-
-/*
-    //Create some users
-    var user1 = {email: 'filiptodoric@gmail.com', classes: ['COMP3203', 'COMP2406', 'BIOL1902']};
-    var user2 = {name: 'stodoric@gmail.com', classes: ['ENGI4500']};
-
-    // Insert some users
-    collection.insert([user1, user2], function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.insertCount, result);
-      }
-*/
-      // find users
-      collection.find({email: 'filiptodoric@gmail.com'}).toArray(function (err, result) {
-            if (err) {
-              console.log(err);
-            } else if (result.length) {
-              console.log('Found:', result);
-            } else {
-              console.log('No document(s) found with defined "find" criteria!');
-            }
-
-      //Close connection
-      db.close();
-    });
-
+    console.log('saved successfully:', userObj);
   }
 });
