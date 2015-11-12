@@ -1,36 +1,51 @@
-//Lets load the mongoose module in our program
-var mongoose = require('mongoose');
+//lets require/import the mongodb native drivers.
+var mongodb = require('mongodb');
 
-//Lets connect to our database using the DB server URL.
-mongoose.connect('mongodb://localhost/gradecalc');
+//We need to work with "MongoClient" interface in order to connect to a mongodb server.
+var MongoClient = mongodb.MongoClient;
 
-/**
- * Lets define our Model for User entity. This model represents a collection in the database.
- * We define the possible schema of User document and data types of each field.
- * */
-//var Class = mongoose.model('Class', {className: String, marks: [{type: Number}], grades: [{type: Number}]});
-//var User = mongoose.model('User', {email: String, classes: [Class] });
-/**
- * Lets Use our Models
- * */
+// Connection URL. This is where your mongodb server is running.
+var url = 'mongodb://localhost:27017/gradecalc';
 
-var Schema = mongoose.Schema;
-var Class = mongoose.model('Class', {className: String, marks: [{type: Number}], grades: [{type: Number}]});
-var User = mongoose.model('User',{
-   email: String,
-   classes: [ {type: Schema.Types.ObjectID, ref: 'Class'}]
- });
+// Use connect method to connect to the Server
+MongoClient.connect(url, function (err, db) {
+  if (err) {
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  } else {
+    //HURRAY!! We are connected. :)
+    console.log('Connection established to', url);
 
- var Class1 = new Class({className: 'STAC1234', marks: [72, 88, 63], grades: [30, 40, 30]});
+    // Get the documents collection
+    var collection = db.collection('users');
 
- Class1.save(function(err, classData) {
-    var User1 = new User({email: 'me@overflow.com', classes: [class1]})
-    User1.classes.push(classData._id);
-    User1.save(function(err, userData) {
+
+
+    //Create some users
+    var user1 = {email: 'filiptodoric@gmail.com', classes: ['COMP3203', 'COMP2406', 'BIOL1902']};
+    var user2 = {name: 'stodoric@gmail.com', classes: ['ENGI4500']};
+
+    // Insert some users
+    collection.insert([user1, user2], function (err, result) {
       if (err) {
-        console.log("CLASS This is the error: " + err);
+        console.log(err);
       } else {
-        console.log('CLASS saved successfully:', userData);
+        console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.insertCount, result);
       }
-    })
- });
+    });
+
+      // find users
+      collection.find({email: 'filiptodoric@gmail.com'}).toArray(function (err, result) {
+            if (err) {
+              console.log(err);
+            } else if (result.length) {
+              console.log('Found:', result);
+            } else {
+              console.log('No document(s) found with defined "find" criteria!');
+            }
+
+      //Close connection
+      db.close();
+    });
+
+  }
+});
