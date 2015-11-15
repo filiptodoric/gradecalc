@@ -22,7 +22,7 @@ MongoClient.connect(url, function (err, db) {
 
     //Create some users
     var user1 = {email: 'filiptodoric@gmail.com', classes: ['COMP3203', 'COMP2406', 'BIOL1902']};
-    var user2 = {name: 'stodoric@gmail.com', classes: ['ENGI4500']};
+    var user2 = {email: 'stodoric@gmail.com', classes: ['ENGI4500']};
 
     // Insert some users
     collection.insert([user1, user2], function (err, result) {
@@ -33,15 +33,15 @@ MongoClient.connect(url, function (err, db) {
       }
     });
 
-      // find users
-      collection.find({email: 'filiptodoric@gmail.com'}).toArray(function (err, result) {
-            if (err) {
-              console.log(err);
-            } else if (result.length) {
-              console.log('Found:', result);
-            } else {
-              console.log('No document(s) found with defined "find" criteria!');
-            }
+    // find users
+    collection.find({email: 'stodoric@gmail.com'}).toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if (result.length) {
+        console.log('Found:', result);
+      } else {
+        console.log('No document(s) found with defined "find" criteria!');
+      }
 
       //Close connection
       db.close();
