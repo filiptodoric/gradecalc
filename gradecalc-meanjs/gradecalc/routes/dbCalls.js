@@ -26,7 +26,7 @@ var connectToDBs = function(callback) {
 // connect to the database
 connectToDBs();
 
-router.get('/getFilip', function(req, res) {
+router.get('/getUser', function(req, res) {
     var renderUser = function(err, userInfo) {
         if (err) {
             userInfo = [{"email": email,
