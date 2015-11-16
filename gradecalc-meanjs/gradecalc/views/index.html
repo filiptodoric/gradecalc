@@ -14,14 +14,19 @@
   <title>gradecalc</title>
 
   <script>
+
+  /* GLOBAL VARIABLES */
+  var user = null;
+
+  /* GLOBAL VARIABLES */
   function calcluateGrades() {
     var marks = getMarks();
     var grades = getGrades();
     var finalMark = 0;
     if (marks.length == grades.length) {
-        for(var i = 0; i < marks.length; i++)  {
-            finalMark = finalMark + (marks[i] * (grades[i]/100));
-        }
+      for(var i = 0; i < marks.length; i++)  {
+        finalMark = finalMark + (marks[i] * (grades[i]/100));
+      }
     }
     else {
       error();
@@ -58,7 +63,14 @@
     });
     return grades;
   }
-          // body style tag is there to centre the divs 
+
+  function getUser()  {
+    $.getJSON("/getFilip", function(data) {
+      user = data[0];
+    });
+  }
+
+  // body style tag is there to centre the divs
   </script>
 
 </head>
