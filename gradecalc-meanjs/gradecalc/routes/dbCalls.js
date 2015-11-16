@@ -35,7 +35,7 @@ router.get('/getUser', function(req, res) {
         res.send(userInfo);
     }
     if (true) {
-      collection.find({email: 'filiptodoric@gmail.com'}).toArray(renderUser);
+      collection.find({email: 'new@gmail.com'}).toArray(renderUser);
     } else {
         res.send([{"email": email,
                   "classes": 'there was an error styll.'}]);

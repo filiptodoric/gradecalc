@@ -68,6 +68,7 @@
     $.getJSON("/getUser", function(data) {
       user = data[0];
       fillDropdown();
+      fillGrades();
     });
   }
 
@@ -75,7 +76,7 @@
     var classes = user.classes;
     var list = document.getElementById("classDropdown");
     for (var i = 0; i < classes.length; i++){
-      var opt = classes[i];
+      var opt = classes[i].className;
       var li = document.createElement("li");
       var link = document.createElement("a");
       var text = document.createTextNode(opt);
@@ -85,6 +86,21 @@
       list.appendChild(li);
     }
   }
+
+  function fillGrades() {
+    var grades = user.classes[0].grades;
+    var marks = user.classes[0].marks;
+
+    var arrayOfMarks = $(".marks");
+    var arrayOfGrades = $(".grades");
+
+    for(var x = 0; x < grades.length; x++)  {
+      arrayOfMarks[x].value = marks[x];
+      arrayOfGrades[x].value = grades[x];
+    }
+
+  }
+
   // When page is loaded.
   $(function()  {
     getUser();

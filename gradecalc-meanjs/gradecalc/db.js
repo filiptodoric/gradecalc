@@ -22,7 +22,22 @@ MongoClient.connect(url, function (err, db) {
 
     //Create some users
     var user1 = {email: 'filiptodoric@gmail.com', classes: ['COMP3203', 'COMP2406', 'BIOL1902']};
-    var user2 = {email: 'stodoric@gmail.com', classes: ['ENGI4500']};
+    //var user2 = {email: 'stodoric@gmail.com', classes: ['ENGI4500']};
+    var user2 = {email:"new@gmail.com",
+    classes:
+    [
+      {
+        className: "COMP3203",
+        marks: [72, 85, 64],
+        grades: [20, 40, 30]
+      },
+      {
+        className: "BIOL1902",
+        marks: [85, 65, 45],
+        grades: [30, 40, 30]
+      }
+    ]
+  }
 
     // Insert some users
     collection.insert([user1, user2], function (err, result) {
