@@ -27,6 +27,7 @@ var connectToDBs = function(callback) {
 connectToDBs();
 
 router.get('/getUser', function(req, res) {
+    var reqUser = req.query.email
     var renderUser = function(err, userInfo) {
         if (err) {
             userInfo = [{"email": email,
@@ -35,7 +36,7 @@ router.get('/getUser', function(req, res) {
         res.send(userInfo);
     }
     if (true) {
-      collection.find({email: 'new@gmail.com'}).toArray(renderUser);
+      collection.find({email: reqUser}).toArray(renderUser);
     } else {
         res.send([{"email": email,
                   "classes": 'there was an error styll.'}]);

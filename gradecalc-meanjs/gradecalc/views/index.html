@@ -17,7 +17,7 @@
 
   /* GLOBAL VARIABLES */
   var user = null;
-
+  var li;
   /* GLOBAL VARIABLES */
   function calcluateGrades() {
     var marks = getMarks();
@@ -38,6 +38,8 @@
     console.log("A grade or mark is missing");
   }
 
+
+// TODO: these functions need to be generalized
   function getMarks() {
     var arrayOfMarks = $(".marks");
     var marks = [];
@@ -64,11 +66,13 @@
     return grades;
   }
 
-  function getUser()  {
-    $.getJSON("/getUser", function(data) {
+  function getUser(reqUser)  {
+    $.getJSON("/getUser", {email: reqUser}, function(data) {
       user = data[0];
-      fillDropdown();
-      fillGrades();
+      if(user != undefined || user != null) {
+        fillDropdown();
+        fillGrades(1);
+      }
     });
   }
 
@@ -78,6 +82,7 @@
     for (var i = 0; i < classes.length; i++){
       var opt = classes[i].className;
       var li = document.createElement("li");
+      li.id = i;
       var link = document.createElement("a");
       var text = document.createTextNode(opt);
       link.appendChild(text);
@@ -87,13 +92,11 @@
     }
   }
 
-  function fillGrades() {
-    var grades = user.classes[0].grades;
-    var marks = user.classes[0].marks;
-
+  function fillGrades(x) {
+    var grades = user.classes[x].grades;
+    var marks = user.classes[x].marks;
     var arrayOfMarks = $(".marks");
     var arrayOfGrades = $(".grades");
-
     for(var x = 0; x < grades.length; x++)  {
       arrayOfMarks[x].value = marks[x];
       arrayOfGrades[x].value = grades[x];
@@ -101,9 +104,27 @@
 
   }
 
+
+
+  function populateDropdownSelected(e){
+    classIndex = parseInt(this.id);
+    fillGrades(classIndex);
+  }
+
+
+  function addDropDownClickEvent() {
+    li = document.getElementsByTagName("li");
+    for(var i = 0;i<li.length;i++){
+      li[i].addEventListener("click", populateDropdownSelected);
+    }
+  }
   // When page is loaded.
   $(function()  {
-    getUser();
+    getUser("new@gmail.com");
+  });
+
+  $(window).load(function(){
+    addDropDownClickEvent();
   });
 
 /*
