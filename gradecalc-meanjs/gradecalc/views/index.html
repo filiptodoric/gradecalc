@@ -67,9 +67,35 @@
   function getUser()  {
     $.getJSON("/getFilip", function(data) {
       user = data[0];
+      fillDropdown();
     });
   }
 
+  function fillDropdown() {
+    var classes = user.classes;
+    var list = document.getElementById("classDropdown");
+    for (var i = 0; i < classes.length; i++){
+      var opt = classes[i];
+      var li = document.createElement("li");
+      var link = document.createElement("a");
+      var text = document.createTextNode(opt);
+      link.appendChild(text);
+      link.href = "#";
+      li.appendChild(link);
+      list.appendChild(li);
+    }
+  }
+  // When page is loaded.
+  $(function()  {
+    getUser();
+  });
+
+/*
+<li><a href="#">COMP2406</a></li>
+<li><a href="#">COMP3004</a></li>
+<li><a href="#">PHIL2001</a></li>
+<li><a href="#">MATH2007</a></li>
+*/
   // body style tag is there to centre the divs
   </script>
 
@@ -83,13 +109,9 @@
       Select your class
       <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <li><a href="#">COMP2406</a></li>
-      <li><a href="#">COMP3004</a></li>
-      <li><a href="#">PHIL2001</a></li>
-      <li><a href="#">MATH2007</a></li>
-      <li role="separator" class="divider"></li>
+    <ul id="classDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
       <li><a href="#">Add class</a></li>
+      <li role="separator" class="divider"></li>
     </ul>
   </div>
 

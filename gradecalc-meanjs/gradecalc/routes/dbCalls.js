@@ -27,7 +27,6 @@ var connectToDBs = function(callback) {
 connectToDBs();
 
 router.get('/getFilip', function(req, res) {
-  //console.log(collection.find());
     var renderUser = function(err, userInfo) {
         if (err) {
             userInfo = [{"email": email,
@@ -35,16 +34,12 @@ router.get('/getFilip', function(req, res) {
         }
         res.send(userInfo);
     }
-
-    if (1 < 2) {
-      //  collection.find({email: 'filiptodoric@gmail.com'}).toArray(renderUser);
-      collection.find({email: 'stodoric@gmail.com'}).toArray(renderUser);
+    if (true) {
+      collection.find({email: 'filiptodoric@gmail.com'}).toArray(renderUser);
     } else {
         res.send([{"email": email,
                   "classes": 'there was an error styll.'}]);
     }
-
-
 });
 
 
