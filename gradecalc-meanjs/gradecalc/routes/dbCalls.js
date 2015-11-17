@@ -36,6 +36,7 @@ router.get('/getUser', function(req, res) {
         res.send(userInfo);
     }
     if (true) {
+      updateTest();
       collection.find({email: reqUser}).toArray(renderUser);
     } else {
         res.send([{"email": email,
@@ -43,6 +44,17 @@ router.get('/getUser', function(req, res) {
     }
 });
 
+function updateTest()   {
+  collection.update({"email": "new@gmail.com"}, {
+    $push: {
+      "classes": {
+        "className": "DDDD4444",
+        "marks": [75, 85, 95],
+        "grades": [2, 3, 5]
+      }
+    }
+  });
+}
 
 
 module.exports = router;
