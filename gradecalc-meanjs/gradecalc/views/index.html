@@ -71,7 +71,7 @@
       user = data[0];
       if(user != undefined || user != null) {
         fillDropdown();
-        fillGrades(1);
+        fillGrades(0);
       }
     });
   }
@@ -97,19 +97,19 @@
     var marks = user.classes[x].marks;
     var arrayOfMarks = $(".marks");
     var arrayOfGrades = $(".grades");
-    
+    clearTextBoxes('the-grades');
     for(var x = 0; x < grades.length; x++)  {
       arrayOfMarks[x].value = marks[x];
       arrayOfGrades[x].value = grades[x];
     }
-
   }
 
 
 
-  function populateDropdownSelected(e){
-    e.preventDefault();
-    var classIndex = parseInt(this.id);
+  function populateDropdownSelected(li){
+    //e.preventDefault();
+    var selectListElement = li //document.getElementById(li);
+    var classIndex = parseInt(selectListElement.id) || 0;
     fillGrades(classIndex);
     $('#dropdownMenu2').text(this.innerText);
   }
@@ -117,18 +117,33 @@
 
   function addDropDownClickEvent() {
     li = document.getElementsByTagName("li");
-    for(var i = 0;i<li.length;i++){
-      li[i].addEventListener("click", populateDropdownSelected);
+    for(var i = 0; i<li.length; i++)  {
+      li[i].addEventListener("click", populateDropdownSelected(li[i]));
     }
   }
   // When page is loaded.
   $(function()  {
-    getUser("new@gmail.com");
+    //getUser("new@gmail.com");
+    var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
+      var userEmail = document.getElementById('userEmail').value;
+      if(userEmail != null || userEmail != undefined) {
+        getUser(userEmail);
+        addDropDownClickEvent();
+      }
+    });
   });
 
   $(window).load(function(){
-    addDropDownClickEvent();
+    //addDropDownClickEvent();
   });
+
+  function clearTextBoxes(divID)  {
+    $('#' + divID).find('input:text').each(function() {
+                $(this).val('');
+            }
+    );
+  }
+
 
 /*
 <li><a href="#">COMP2406</a></li>
@@ -214,5 +229,9 @@
   </div>
   <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default">What's my mark?</button>
   <div id="finalGrade"> </div>
+  <label for="formGroupExampleInput">Email</label>
+  <input type="text" class="form-control" id="userEmail" placeholder="email@me.com"> </input>
+  <button type="button" id="logInButton" class="btn btn-default">Log in</button>
+
 </body>
 </html>

@@ -17,6 +17,8 @@ var connectToDBs = function(callback) {
     console.log('Connection established to', url);
     collection = db.collection('users');
 
+
+
     if (callback) {
       callback();
     }
@@ -37,7 +39,7 @@ router.get('/getUser', function(req, res) {
     }
     if (true) {
       updateTest();
-      collection.find({email: reqUser}).toArray(renderUser);
+      collection.find({email: reqUser}).limit(1).toArray(renderUser);
     } else {
         res.send([{"email": email,
                   "classes": 'there was an error styll.'}]);
@@ -71,7 +73,37 @@ function deleteClass(className, email)  {
           }
       }
   });
-
 }
 
+
 module.exports = router;
+
+
+
+
+// //ERASE
+// var user2 = {email:"test@gmail.com",
+// classes:
+// [
+//   {
+//     className: "TEST0001",
+//     marks: [84, 45, 54],
+//     grades: [30, 30, 40]
+//   },
+//   {
+//     className: "HSS1102",
+//     marks: [56, 81, 72, 100, 81],
+//     grades: [30, 30, 30, 5, 5]
+//   }
+// ]
+// }
+//
+// // Insert some users
+// collection.insert([user2], function (err, result) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.insertCount, result);
+//   }
+// });
+// //ERASE
