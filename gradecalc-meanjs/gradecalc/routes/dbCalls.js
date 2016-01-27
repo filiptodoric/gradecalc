@@ -44,11 +44,11 @@ router.get('/getUser', function(req, res) {
     }
 });
 
-function updateTest()   {
-  collection.update({"email": "new@gmail.com"}, {
+function updateTest(className, email, newClass)   {
+  collection.update({"email": email}, {
     $push: {
       "classes": {
-        "className": "DDDD4444",
+        "className": className,
         "marks": [75, 85, 95],
         "grades": [2, 3, 5]
       }
@@ -56,5 +56,22 @@ function updateTest()   {
   });
 }
 
+var newClass = {
+    className: 'CCCC3333',
+    marks: [75, 85, 95],
+    grades: [20, 30, 50]
+};
+
+
+function deleteClass(className, email)  {
+  collection.update({"email": email}, {
+      $pull: {
+          "classes": {
+              "className": className
+          }
+      }
+  });
+
+}
 
 module.exports = router;

@@ -39,7 +39,7 @@
   }
 
 
-// TODO: these functions need to be generalized
+  // TODO: these functions need to be generalized
   function getMarks() {
     var arrayOfMarks = $(".marks");
     var marks = [];
@@ -79,7 +79,7 @@
   function fillDropdown() {
     var classes = user.classes;
     var list = document.getElementById("classDropdown");
-    for (var i = 0; i < classes.length; i++){
+    for (var i = 0; i < classes.length; i++)  {
       var opt = classes[i].className;
       var li = document.createElement("li");
       li.id = i;
@@ -97,6 +97,7 @@
     var marks = user.classes[x].marks;
     var arrayOfMarks = $(".marks");
     var arrayOfGrades = $(".grades");
+    
     for(var x = 0; x < grades.length; x++)  {
       arrayOfMarks[x].value = marks[x];
       arrayOfGrades[x].value = grades[x];
