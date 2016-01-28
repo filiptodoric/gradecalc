@@ -1,4 +1,4 @@
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -39,9 +39,9 @@ input::-ms-clear, textarea::-ms-clear {
   display: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main components 
+Main components
 
 -------------------------------- */
 header[role=banner] {
@@ -170,9 +170,9 @@ header[role=banner]::after {
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xsigin/signup popup 
+xsigin/signup popup
 
 -------------------------------- */
 .cd-user-modal {
@@ -191,6 +191,7 @@ xsigin/signup popup
   -moz-transition: opacity 0.3s, visibility 0.3s;
   transition: opacity 0.3s, visibility 0.3s;
 }
+
 .cd-user-modal.is-visible {
   visibility: visible;
   opacity: 1;
@@ -340,7 +341,7 @@ xsigin/signup popup
   /* space left for the HIDE button */
   padding-right: 65px;
 }
-.cd-form input[type=submit] {
+.cd-form input[type=button] {
   padding: 16px 0;
   cursor: pointer;
   background: #2f889a;

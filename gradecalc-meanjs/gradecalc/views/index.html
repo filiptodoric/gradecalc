@@ -111,7 +111,7 @@
   // When page is loaded.
   $(function()  {
     var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
-      var userEmail = document.getElementById('userEmail').value;
+      var userEmail = document.getElementById('signin-email').value;
       if(userEmail != null || userEmail != undefined) {
         getUser(userEmail);
       }
@@ -189,7 +189,7 @@
           </p>
 
           <p class="fieldset">
-            <input class="full-width" type="submit" value="Login">
+            <input class="full-width" type="button" id="logInButton" value="Login">
           </p>
         </form>
 
@@ -252,7 +252,9 @@
     </div> <!-- cd-user-modal-container -->
   </div> <!-- cd-user-modal -->
 
-  <div class="dropdown" >
+  <div class="cd-user-modal-container" >
+
+  <div class="dropdown" align="center" style="margin: 0px auto;" >
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Select your class
       <span class="caret"></span>
@@ -265,7 +267,7 @@
 
 
   <div id="the-grades" >
-    <table>
+    <table align="center" style="margin: 0px auto;">
       <tr>
         <th>Your grade</th>
         <th>% of grade</th>
@@ -320,12 +322,11 @@
       </tr>
     </table>
   </div>
+  <div align="center" style="margin: 0px auto;">
   <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default">What's my mark?</button>
+  </div>
   <div id="finalGrade"> </div>
-  <label for="formGroupExampleInput">Email</label>
-  <input type="text" class="form-control" id="userEmail" placeholder="email@me.com"> </input>
-  <button type="button" id="logInButton" class="btn btn-default">Log in</button>
-
+</div>
 
 </body>
 </html>

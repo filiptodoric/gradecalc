@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
 	formModal.on('click', function(event){
 		if( $(event.target).is(formModal) || $(event.target).is('.cd-close-form') ) {
 			formModal.removeClass('is-visible');
-		}	
+		}
 	});
 	//close modal when clicking the esc keyboard button
 	$(document).keyup(function(event){
@@ -43,14 +43,14 @@ jQuery(document).ready(function($){
 	$('.hide-password').on('click', function(){
 		var togglePass= $(this),
 			passwordField = togglePass.prev('input');
-		
+
 		( 'password' == passwordField.attr('type') ) ? passwordField.attr('type', 'text') : passwordField.attr('type', 'password');
 		( 'Hide' == togglePass.text() ) ? togglePass.text('Show') : togglePass.text('Hide');
 		//focus and move cursor to the end of input field
 		passwordField.putCursorAtEnd();
 	});
 
-	//show forgot-password form 
+	//show forgot-password form
 	forgotPasswordLink.on('click', function(event){
 		event.preventDefault();
 		forgot_password_selected();
@@ -88,8 +88,9 @@ jQuery(document).ready(function($){
 		formForgotPassword.addClass('is-selected');
 	}
 
-	//REMOVE THIS - it's just to show error messages 
-	formLogin.find('input[type="submit"]').on('click', function(event){
+	//REMOVE THIS - it's just to show error messages
+
+/*	formLogin.find('input[type="submit"]').on('click', function(event){
 		event.preventDefault();
 		formLogin.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
 	});
@@ -97,7 +98,7 @@ jQuery(document).ready(function($){
 		event.preventDefault();
 		formSignup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
 	});
-
+*/
 
 	//IE9 placeholder fallback
 	//credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
