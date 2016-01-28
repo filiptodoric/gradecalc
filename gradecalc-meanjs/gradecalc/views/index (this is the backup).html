@@ -1,20 +1,24 @@
-<!doctype html>
-<html lang="en" class="no-js">
+<!--
+<img src="/images/pug.jpeg" alt="This is a cute pug." width="104" height="142">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<input type="text" maxlength="4" size="4">
+-->
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="stylesheets/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="stylesheets/styleLogin.css"> <!-- Gem style -->
-	<script src="javascripts/modernizr.js"></script> <!-- Modernizr -->
+
+  <link rel="stylesheet" href="stylesheets/reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" href="stylesheets/styleLogin.css"> <!-- Gem style -->
+  <script src="javascripts/modernizr.js"></script> <!-- Modernizr -->
   <script src="javascripts/main.js"></script> <!-- Gem jQuery -->
 
-	<title>gradecalc</title>
+
+  <title>gradecalc</title>
 
   <script>
 
@@ -148,109 +152,38 @@
 
 
 </head>
-<body>
-  <header role="banner">
-    <!-- <div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div> -->
+ <body style="width: 60%; margin: 0px auto;">   <!-- body style tag is there to centre the divs -->
 
-    <nav class="main-nav">
-      <ul>
-        <!-- inser more links here -->
-        <li><a class="cd-signin" href="#0">Sign in</a></li>
-        <li><a class="cd-signup" href="#0">Sign up</a></li>
-      </ul>
-    </nav>
-  </header>
+
+
+<header role="banner">
+		<div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div>
+
+		<nav class="main-nav">
+			<ul>
+				<!-- inser more links here -->
+				<li><a class="cd-signin" href="#0">Sign in</a></li>
+				<li><a class="cd-signup" href="#0">Sign up</a></li>
+			</ul>
+		</nav>
+	</header>
+
+
+
+  <h1> Welcome to gradecalc! </h1>
+  <p> Please input your grades below </p>
 
   <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
-    <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
-      <ul class="cd-switcher">
-        <li><a href="#0">Sign in</a></li>
-        <li><a href="#0">New account</a></li>
-      </ul>
+  	<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
 
-      <div id="cd-login"> <!-- log in form -->
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="signin-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
+  		<ul class="cd-switcher">
+  			<li><a href="#0">Sign in</a></li>
+  			<li><a href="#0">New account</a></li>
+  		</ul>
 
-          <p class="fieldset">
-            <label class="image-replace cd-password" for="signin-password">Password</label>
-            <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-            <a href="#0" class="hide-password">Hide</a>
-            <span class="cd-error-message">Error message here!</span>
-          </p>
+  	</div>
+  </div>
 
-          <p class="fieldset">
-            <input type="checkbox" id="remember-me" checked>
-            <label for="remember-me">Remember me</label>
-          </p>
-
-          <p class="fieldset">
-            <input class="full-width" type="submit" value="Login">
-          </p>
-        </form>
-
-        <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
-        <!-- <a href="#0" class="cd-close-form">Close</a> -->
-      </div> <!-- cd-login -->
-
-      <div id="cd-signup"> <!-- sign up form -->
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-username" for="signup-username">Username</label>
-            <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="signup-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <label class="image-replace cd-password" for="signup-password">Password</label>
-            <input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
-            <a href="#0" class="hide-password">Hide</a>
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <input type="checkbox" id="accept-terms">
-            <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-          </p>
-
-          <p class="fieldset">
-            <input class="full-width has-padding" type="submit" value="Create account">
-          </p>
-        </form>
-
-        <!-- <a href="#0" class="cd-close-form">Close</a> -->
-      </div> <!-- cd-signup -->
-
-      <div id="cd-reset-password"> <!-- reset password form -->
-        <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
-
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="reset-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <input class="full-width has-padding" type="submit" value="Reset password">
-          </p>
-        </form>
-
-        <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
-      </div> <!-- cd-reset-password -->
-      <a href="#0" class="cd-close-form">Close</a>
-    </div> <!-- cd-user-modal-container -->
-  </div> <!-- cd-user-modal -->
 
   <div class="dropdown" >
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -325,7 +258,6 @@
   <label for="formGroupExampleInput">Email</label>
   <input type="text" class="form-control" id="userEmail" placeholder="email@me.com"> </input>
   <button type="button" id="logInButton" class="btn btn-default">Log in</button>
-
 
 </body>
 </html>
