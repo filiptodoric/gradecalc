@@ -90,6 +90,7 @@
       li.appendChild(link);
       list.appendChild(li);
     }
+    setDropdown();
   }
 
   function fillGrades(x) {
@@ -104,34 +105,31 @@
     }
   }
 
-
-
-  function populateDropdownSelected(li){
-    //e.preventDefault();
-    var selectListElement = li //document.getElementById(li);
-    var classIndex = parseInt(selectListElement.id) || 0;
-    fillGrades(classIndex);
-    $('#dropdownMenu2').text(this.innerText);
-  }
-
-
-  function addDropDownClickEvent() {
-    li = document.getElementsByTagName("li");
-    for(var i = 0; i<li.length; i++)  {
-      li[i].addEventListener("click", populateDropdownSelected(li[i]));
-    }
-  }
   // When page is loaded.
   $(function()  {
-    //getUser("new@gmail.com");
     var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
       var userEmail = document.getElementById('userEmail').value;
       if(userEmail != null || userEmail != undefined) {
         getUser(userEmail);
-        addDropDownClickEvent();
       }
     });
   });
+
+  // Changes the Dropdown text to what class is selected
+  function setDropdown()  {
+    $(".dropdown-menu li a").click(function(){
+      $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+      $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+      var classIndexAsString = this.parentNode.id;
+      if(classIndexAsString == "")  {
+        // add a new class
+      }
+      else {
+        var classIndexId = parseInt(classIndexAsString);
+        fillGrades(classIndexId);
+      }
+    });
+  }
 
   $(window).load(function(){
     //addDropDownClickEvent();
@@ -139,23 +137,14 @@
 
   function clearTextBoxes(divID)  {
     $('#' + divID).find('input:text').each(function() {
-                $(this).val('');
-            }
-    );
-  }
-
-
-/*
-<li><a href="#">COMP2406</a></li>
-<li><a href="#">COMP3004</a></li>
-<li><a href="#">PHIL2001</a></li>
-<li><a href="#">MATH2007</a></li>
-*/
-  // body style tag is there to centre the divs
-  </script>
+      $(this).val('');
+    }
+  );
+}
+</script>
 
 </head>
-<body style="width: 60%; margin: 0px auto;">
+ <body style="width: 60%; margin: 0px auto;">   <!-- body style tag is there to centre the divs -->
   <h1> Welcome to gradecalc! </h1>
   <p> Please input your grades below </p>
 
