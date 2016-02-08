@@ -29,17 +29,24 @@ var connectToDBs = function(callback) {
 connectToDBs();
 
 router.get('/getUser', function(req, res) {
-    var reqUser = req.query.email
+    var reqEmail = req.query.email;
+    var reqPassword = req.query.password;
     var renderUser = function(err, userInfo) {
         if (err) {
             userInfo = [{"email": email,
                       "classes": 'there was an error styll.'}];
         }
-        res.send(userInfo);
+        console.log(userInfo[0].password + " THATW AS ME");
+        if(userInfo[0].password == reqPassword) {
+          res.send(userInfo);
+        }
+        else {
+          res.status(500).send("The passwords don't match.");
+        }
     }
     if (true) {
-      updateTest();
-      collection.find({email: reqUser}).limit(1).toArray(renderUser);
+      //updateTest();
+      collection.find({email: reqEmail}).limit(1).toArray(renderUser);
     } else {
         res.send([{"email": email,
                   "classes": 'there was an error styll.'}]);

@@ -69,8 +69,8 @@
     return grades;
   }
 
-  function getUser(reqUser)  {
-    $.getJSON("/getUser", {email: reqUser}, function(data) {
+  function getUser(userEmail, userPassword)  {
+    $.getJSON("/getUser", {email: userEmail, password: userPassword}, function(data) {
       user = data[0];
       if(user != undefined || user != null) {
         fillDropdown();
@@ -112,8 +112,9 @@
   $(function()  {
     var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
       var userEmail = document.getElementById('signin-email').value;
+			var userPassword = document.getElementById('signin-password').value;
       if(userEmail != null || userEmail != undefined) {
-        getUser(userEmail);
+        getUser(userEmail, userPassword);
       }
     });
   });
