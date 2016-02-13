@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
   if (req.session.email) {
     res.render('index');
     console.log("I'm here");
-    getUser(req, res);
+ //   getUser(req, res);
   }
   else {
     res.render('index');
@@ -47,6 +47,7 @@ router.get('/getUser', function getUser(req, res) {
     if(userInfo[0].password == reqPassword) {
       res.send(userInfo);
       req.session.email = userInfo[0].email;
+      req.session.save();
     }
     else {
       res.status(500).send("The passwords don't match.");
