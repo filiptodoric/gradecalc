@@ -21,6 +21,8 @@
   /* GLOBAL VARIABLES */
   var user = null;
   var li;
+	var formModal = $('.cd-user-modal');
+
   /* GLOBAL VARIABLES */
   function calcluateGrades() {
     var marks = getMarks();
@@ -79,6 +81,16 @@
     });
   }
 
+	function signUp(userEmail, userPassword)	{
+		$.getJSON("/signup", {email: userEmail, password: userPassword}, function(data) {
+      user = data[0];
+      // if(user != undefined || user != null) {
+      //   fillDropdown();
+      //   fillGrades(0);
+      // }
+    });
+	}
+
   function fillDropdown() {
     var classes = user.classes;
     var list = document.getElementById("classDropdown");
@@ -108,16 +120,27 @@
     }
   }
 
-  // When page is loaded.
-  $(function()  {
-    var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
-      var userEmail = document.getElementById('signin-email').value;
+	// When page is loaded.
+	$(function()  {
+		var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
+			var userEmail = document.getElementById('signin-email').value;
 			var userPassword = document.getElementById('signin-password').value;
-      if(userEmail != null || userEmail != undefined) {
-        getUser(userEmail, userPassword);
-      }
-    });
-  });
+			if(userEmail != null || userEmail != undefined) {
+				// TODO check what the response is from getUser hide as needed
+				getUser(userEmail, userPassword);
+				formModal.removeClass('is-visible');
+			}
+		});
+
+		var signupButton = document.getElementById('signupButton').addEventListener('click', function()  {
+			var userEmail = document.getElementById('signup-email').value;
+			var userPassword = document.getElementById('signup-password').value;
+			if(userEmail != null || userEmail != undefined || userPassword != null || userPassword != undefined) {
+				signUp(userEmail, userPassword);
+			}
+		});
+
+	});
 
   // Changes the Dropdown text to what class is selected
   function setDropdown()  {
@@ -165,8 +188,8 @@
   <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
     <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
       <ul class="cd-switcher">
-        <li><a href="#0">Sign in</a></li>
-        <li><a href="#0">New account</a></li>
+        <li><a >Sign in</a></li>
+        <li><a >New account</a></li>
       </ul>
 
       <div id="cd-login"> <!-- log in form -->
@@ -201,12 +224,6 @@
       <div id="cd-signup"> <!-- sign up form -->
         <form class="cd-form">
           <p class="fieldset">
-            <label class="image-replace cd-username" for="signup-username">Username</label>
-            <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
             <label class="image-replace cd-email" for="signup-email">E-mail</label>
             <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
             <span class="cd-error-message">Error message here!</span>
@@ -225,7 +242,7 @@
           </p>
 
           <p class="fieldset">
-            <input class="full-width has-padding" type="submit" value="Create account">
+						<input class="full-width" type="button" id="signupButton" value="Create Account">
           </p>
         </form>
 

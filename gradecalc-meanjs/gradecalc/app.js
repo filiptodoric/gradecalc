@@ -4,10 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
-//var db = require('./db');
 var db = require('./routes/dbCalls');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -27,8 +25,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: "We need a better secret!",
+    store: new MongoStore({url: 'mongodb://localhost:27017/gradecalc'}),
+    resave: false,
+    saveUninitialized: true
+  }));
 
-app.use('/', routes);
+
+//app.use('/', routes);
 app.use('/users', users);
 app.use('/', db);
 
