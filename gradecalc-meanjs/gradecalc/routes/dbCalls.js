@@ -8,97 +8,106 @@ var router = express.Router();
 var collection;
 
 var connectToDBs = function(callback) {
-  MongoClient.connect(url, function(err, db) {
-    if (err) {
-      console.log('Unable to connect to the mongoDB server. Error:', err);
-      throw err;
-    }
-    console.log('Connection established to', url);
-    collection = db.collection('users');
+    MongoClient.connect(url, function(err, db) {
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            throw err;
+        }
+        console.log('Connection established to', url);
+        collection = db.collection('users');
 
-    if (callback) {
-      callback();
-    }
-  });
+        if (callback) {
+            callback();
+        }
+    });
 }
 
 // connect to the database
 connectToDBs();
 
 router.get('/', function(req, res, next) {
-  console.log("This is the session: " + req.session.email);
-  if (req.session.email) {
-    res.render('index');
-    console.log("I'm here");
- //   getUser(req, res);
-  }
-  else {
-    res.render('index');
-  }
-});
-
-router.get('/getUser', function getUser(req, res) {
-  var reqEmail = req.query.email;
-  var reqPassword = req.query.password;
-  var renderUser = function(err, userInfo) {
-    if (err) {
-      res.send([{"email": email, "classes": 'There was an error'}]);
-    }
-    if(userInfo[0].password == reqPassword) {
-      res.send(userInfo);
-      req.session.email = userInfo[0].email;
-      req.session.save();
+    console.log("This is the session: " + req.session.email);
+    if (req.session.email) {
+        res.render('index');
+        console.log("I'm here");
+        loadUser(req, res);
     }
     else {
-      res.status(500).send("The passwords don't match.");
+        res.render('index');
     }
-  }
-  if (true) {
-    collection.find({email: reqEmail}).limit(1).toArray(renderUser);
-  } else {
-    res.send([{"email": email, "classes": 'There was an error'}]);
-  }
 });
 
+router.get('/getUser', function middleGetUser(req, res) {
+    loadUser(req, res);
+});
+
+function loadUser(req, res)  {
+    var reqEmail = req.query.email;
+    var reqPassword = req.query.password;
+    var renderUser = function(err, userInfo) {
+        if (err) {
+            res.send([{"email": email, "classes": 'There was an error'}]);
+        }
+        if(req.session.email) {
+            res.send(userInfo);
+           // req.session.email = userInfo[0].email;
+           // req.session.save();
+        }
+        else if(userInfo[0].password == reqPassword) {
+            res.send(userInfo);
+            req.session.email = userInfo[0].email;
+            req.session.save();
+        }
+        else {
+            res.status(500).send("The passwords don't match.");
+        }
+    }
+    if (true) {
+        collection.find({email: reqEmail}).limit(1).toArray(renderUser);
+    } else {
+        res.send([{"email": email, "classes": 'There was an error'}]);
+    }
+}
+
 router.get('/signup', function(req, res) {
-  var reqEmail = req.query.email;
-  var reqPassword = req.query.password;
-  if (true) {
-    // this isn't working, need to check if it exists in the db or not and then go from there
-    //collection.find({email: reqEmail}).count();
-    collection.insert({email: reqEmail, password: reqPassword, classes: []});
-  } else {
-    res.send([{"email": email, "classes": 'There was an error'}]);
-  }
+    var reqEmail = req.query.email;
+    var reqPassword = req.query.password;
+    if (true) {
+        // this isn't working, need to check if it exists in the db or not and then go from there
+        //collection.find({email: reqEmail}).count();
+        collection.insert({email: reqEmail, password: reqPassword, classes: []});
+    } else {
+        res.send([{"email": email, "classes": 'There was an error'}]);
+    }
 });
 
 function updateTest(userEmail, className, marks, grades)   {
-  collection.update({"email": userEmail}, {
-    $push: {
-      "classes": {
-        "className": className,
-        "marks": marks,
-        "grades": grades
-      }
-    }
-  });
+    collection.update({"email": userEmail}, {
+        $push: {
+            "classes": {
+                "className": className,
+                "marks": marks,
+                "grades": grades
+            }
+        }
+    });
 }
 
 var newClass = {
-  className: 'CCCC3333',
-  marks: [75, 85, 95],
-  grades: [20, 30, 50]
+    className: 'CCCC3333',
+    marks: [75, 85, 95],
+    grades: [20, 30, 50]
 };
 
 
 function deleteClass(className, email)  {
-  collection.update({"email": email}, {
-    $pull: {
-      "classes": {
-        "className": className
-      }
-    }
-  });
+    collection.update({"email": email}, {
+        $pull: {
+            "classes": {
+                "className": className
+            }
+        }
+    });
 }
 
 
