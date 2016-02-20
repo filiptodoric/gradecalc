@@ -27,7 +27,6 @@ var connectToDBs = function(callback) {
 connectToDBs();
 
 router.get('/', function(req, res, next) {
-    console.log("This is the session: " + req.session.email);
     if (req.user == undefined) {
         res.render('index');
     }
@@ -99,33 +98,3 @@ function deleteClass(className, email)  {
 
 
 module.exports = router;
-
-
-
-
-// //ERASE
-// var user2 = {email:"test@gmail.com",
-// classes:
-// [
-//   {
-//     className: "TEST0001",
-//     marks: [84, 45, 54],
-//     grades: [30, 30, 40]
-//   },
-//   {
-//     className: "HSS1102",
-//     marks: [56, 81, 72, 100, 81],
-//     grades: [30, 30, 30, 5, 5]
-//   }
-// ]
-// }
-//
-// // Insert some users
-// collection.insert([user2], function (err, result) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.insertCount, result);
-//   }
-// });
-// //ERASE
