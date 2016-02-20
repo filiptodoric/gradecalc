@@ -1,202 +1,175 @@
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="stylesheets/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="stylesheets/styleLogin.css"> <!-- Gem style -->
-	<script src="javascripts/modernizr.js"></script> <!-- Modernizr -->
-  <script src="javascripts/main.js"></script> <!-- Gem jQuery -->
+    <script src="javascripts/modernizr.js"></script> <!-- Modernizr -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/nav.css"> <!-- Gem style -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
 
-	<title>gradecalc</title>
+    <title>gradecalc</title>
 
-  <script>
+    <script>
 
-  /* GLOBAL VARIABLES */
-  var user = null;
-  var li;
-  var formModal = $('.cd-user-modal');
+        /* GLOBAL VARIABLES */
+        var user = null;
+        var li;
+        var formModal = $('.cd-user-modal');
 
-  /* GLOBAL VARIABLES */
-  function calcluateGrades() {
-    var marks = getMarks();
-    var grades = getGrades();
-    var finalMark = 0;
-    if (marks.length == grades.length) {
-      for(var i = 0; i < marks.length; i++)  {
-        finalMark = finalMark + (marks[i] * (grades[i]/100));
-      }
-    }
-    else {
-      error();
-    }
-    $("#finalGrade").html(finalMark.toFixed(1) + "%");
-  }
+        /* GLOBAL VARIABLES */
+        function calcluateGrades() {
+            var marks = getMarks();
+            var grades = getGrades();
+            var finalMark = 0;
+            if (marks.length == grades.length) {
+                for(var i = 0; i < marks.length; i++)  {
+                    finalMark = finalMark + (marks[i] * (grades[i]/100));
+                }
+            }
+            else {
+                error();
+            }
+            $("#finalGrade").html(finalMark.toFixed(1) + "%");
+        }
 
-  function error()  {
-    console.log("A grade or mark is missing");
-  }
+        function error()  {
+            console.log("A grade or mark is missing");
+        }
 
 
-  // TODO: these functions need to be generalized
-  function getMarks() {
-    var arrayOfMarks = $(".marks");
-    var marks = [];
-    var x = 0;
-    $.each(arrayOfMarks , function(index, value){
-      if (value.value !== "")  {
-        marks[x] = parseInt(value.value);
-      }
-      x++;
-    });
-    return marks;
-  }
+        // TODO: these functions need to be generalized
+        function getMarks() {
+            var arrayOfMarks = $(".marks");
+            var marks = [];
+            var x = 0;
+            $.each(arrayOfMarks , function(index, value){
+                if (value.value !== "")  {
+                    marks[x] = parseInt(value.value);
+                }
+                x++;
+            });
+            return marks;
+        }
 
-  function getGrades() {
-    var arrayOfGrades = $(".grades");
-    var grades = [];
-    var x = 0;
-    $.each(arrayOfGrades , function(index, value){
-      if (value.value !== "")  {
-        grades[x] = parseInt(value.value);
-      }
-      x++;
-    });
-    return grades;
-  }
+        function getGrades() {
+            var arrayOfGrades = $(".grades");
+            var grades = [];
+            var x = 0;
+            $.each(arrayOfGrades , function(index, value){
+                if (value.value !== "")  {
+                    grades[x] = parseInt(value.value);
+                }
+                x++;
+            });
+            return grades;
+        }
 
-  function fillGrades(x) {
-    var grades = user.classes[x].grades;
-    var marks = user.classes[x].marks;
-    var arrayOfMarks = $(".marks");
-    var arrayOfGrades = $(".grades");
-    clearTextBoxes('the-grades');
-    for(var x = 0; x < grades.length; x++)  {
-      arrayOfMarks[x].value = marks[x];
-      arrayOfGrades[x].value = grades[x];
-    }
-  }
+        function fillGrades(x) {
+            var grades = user.classes[x].grades;
+            var marks = user.classes[x].marks;
+            var arrayOfMarks = $(".marks");
+            var arrayOfGrades = $(".grades");
+            clearTextBoxes('the-grades');
+            for(var x = 0; x < grades.length; x++)  {
+                arrayOfMarks[x].value = marks[x];
+                arrayOfGrades[x].value = grades[x];
+            }
+        }
 
-	// When page is loaded.
-	$(function()  {
+        // When page is loaded.
+        $(function()  {
 
-	});
+        });
 
-  // Changes the Dropdown text to what class is selected
-  /*function setDropdown()  {
-    $(".dropdown-menu li a").click(function(){
-      $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-      $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-      var classIndexAsString = this.parentNode.id;
-      if(classIndexAsString == "")  {
-        // add a new class
-      }
-      else {
-        var classIndexId = parseInt(classIndexAsString);
-        fillGrades(classIndexId);
-      }
-    });
-  }
-*/
+        // Changes the Dropdown text to what class is selected
+        /*function setDropdown()  {
+         $(".dropdown-menu li a").click(function(){
+         $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+         $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+         var classIndexAsString = this.parentNode.id;
+         if(classIndexAsString == "")  {
+         // add a new class
+         }
+         else {
+         var classIndexId = parseInt(classIndexAsString);
+         fillGrades(classIndexId);
+         }
+         });
+         }
+         */
 
-  $(window).load(function(){
-    //addDropDownClickEvent();
-  });
+        $(window).load(function(){
+            //addDropDownClickEvent();
+        });
 
-  function clearTextBoxes(divID)  {
-    $('#' + divID).find('input:text').each(function() {
-      $(this).val('');
-    }
-  );
-}
-</script>
+        function clearTextBoxes(divID)  {
+            $('#' + divID).find('input:text').each(function() {
+                        $(this).val('');
+                    }
+            );
+        }
+    </script>
 
 
 </head>
 <body>
-  <header role="banner">
+<header role="banner">
     <!-- <div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div> -->
     <nav class="main-nav">
-      <ul>
-        <li><a class="cd-signin" href="/login">Sign in</a></li>
-        <li><a class="cd-signup" href="/register">Sign up</a></li>
-      </ul>
+        <ul>
+            <li><a class="cd-signin" href="/login">Sign in</a></li>
+            <li><a class="cd-signup" href="/register">Sign up</a></li>
+        </ul>
     </nav>
-  </header>
+</header>
+<div class="alert alert-info" role="alert"> Create a account to save your grades and classes! </div>
+&nbsp;
+<div class="container">
+    <div class="centerDiv">
 
-
-
-
-
-  <div id="the-grades" >
-    <table align="center" style="margin: 0px auto;">
-        <div class="alert alert-info" role="alert"> Create a account to save your grades and classes! </div>
-
-        <tr>
-        <th>Your grade</th>
-        <th>% of grade</th>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark1" maxlength="8" size="10" placeholder="ex 22/30">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade1" maxlength="8" size="10" placeholder="ex 50">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark2" maxlength="8" size="10">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade2" maxlength="8" size="10">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark3" maxlength="8" size="10">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade3" maxlength="8" size="10">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark4" maxlength="8" size="10">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade4" maxlength="8" size="10">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark5" maxlength="8" size="10">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade5" maxlength="8" size="10">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" class="marks" id="mark6" maxlength="8" size="10">
-        </td>
-        <td>
-          <input type="text" class="grades" id="grade6" maxlength="8" size="10">
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div align="center" style="margin: 0px auto;">
-  <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default">What's my mark?</button>
-  </div>
-  <div id="finalGrade"> </div>
+        <div id="the-grades">
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <h5 class="text-center">Your grade</h5> </div>
+                <div class="col-xs-1"> <h5 class="text-center">% of grade</h5> </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 22/30"> </div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
+                <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-2"> <div id="finalGrade"> </div> </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
