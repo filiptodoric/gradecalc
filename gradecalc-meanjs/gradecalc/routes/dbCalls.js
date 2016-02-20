@@ -53,6 +53,16 @@ router.post('/savegrades', stormpath.loginRequired, function(req, res)  {
     res.sendStatus(200);
 });
 
+router.post('/addNewClass', stormpath.loginRequired, function(req, res)  {
+    var className = req.body.className;
+    var newClass = {className: className,
+    grades: [],
+    marks: []
+    };
+    req.user.customData.classes.push(newClass);
+    req.user.customData.save();
+    res.sendStatus(200);
+});
 function loadUser(req, res)  {
     var renderUser = function(err, userInfo) {
         if (err) {

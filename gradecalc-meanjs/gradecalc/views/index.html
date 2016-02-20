@@ -20,9 +20,8 @@
         /* GLOBAL VARIABLES */
         var user = null;
         var li;
-        var formModal = $('.cd-user-modal');
-
         /* GLOBAL VARIABLES */
+
         function calcluateGrades() {
             var marks = getMarks();
             var grades = getGrades();
@@ -87,23 +86,6 @@
 
         });
 
-        // Changes the Dropdown text to what class is selected
-        /*function setDropdown()  {
-         $(".dropdown-menu li a").click(function(){
-         $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-         $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-         var classIndexAsString = this.parentNode.id;
-         if(classIndexAsString == "")  {
-         // add a new class
-         }
-         else {
-         var classIndexId = parseInt(classIndexAsString);
-         fillGrades(classIndexId);
-         }
-         });
-         }
-         */
-
         $(window).load(function(){
             //addDropDownClickEvent();
         });
@@ -166,7 +148,7 @@
                 <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
             </div>
             <div class="row no-gutter">
-                <div class="col-xs-2"> <div id="finalGrade"> </div> </div>
+                <div class="col-xs-2"> <div id="finalGrade" > </div> </div>
             </div>
         </div>
     </div>
