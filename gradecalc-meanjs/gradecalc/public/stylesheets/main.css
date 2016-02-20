@@ -1,0 +1,38 @@
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.btn-default {
+    color: #ffffff;
+    background-color: #2F88AA;
+    border-color: #FFFFFF;
+}
+
+.btn-default:focus,
+.btn-default.focus {
+/*    color: #ffffff;
+    background-color: #343642;
+    border-color: #FFFFFF;*/
+}
+.btn-default:hover {
+    /*color: #ffffff;
+    background-color: #343642;
+    border-color: #FFFFFF;
+
+    makes things a little larger and nicer
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    */
+}
+
+.container {
+
+}
+
+
+.centerDiv {
+
+}
+
