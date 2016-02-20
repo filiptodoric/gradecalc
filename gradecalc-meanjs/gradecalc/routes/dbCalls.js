@@ -1,9 +1,10 @@
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url = 'mongodb://localhost:27017/gradecalc';
-var ObjectID = mongodb.ObjectID;
 var express = require('express');
 var router = express.Router();
+var stormpath = require('express-stormpath');
+
 
 var collection;
 
@@ -27,59 +28,45 @@ connectToDBs();
 
 router.get('/', function(req, res, next) {
     console.log("This is the session: " + req.session.email);
-    if (req.session.email) {
+    if (req.user == undefined) {
         res.render('index');
-        console.log("I'm here");
-        loadUser(req, res);
     }
     else {
-        res.render('index');
+        res.redirect('/mygrades');
     }
 });
 
-router.get('/getUser', function middleGetUser(req, res) {
+router.get('/getUser', stormpath.loginRequired, function(req, res) {
     loadUser(req, res);
 });
 
+router.get('/mygrades', stormpath.loginRequired, function(req, res) {
+    res.render('mygrades');
+});
+
+router.post('/savegrades', stormpath.loginRequired, function(req, res)  {
+    var classIndex = req.body.classIndex;
+    var grades = req.body.grades;
+    var marks = req.body.marks;
+    req.user.customData.classes[classIndex].grades = grades;
+    req.user.customData.classes[classIndex].marks = marks;
+    req.user.customData.save();
+    res.sendStatus(200);
+});
+
 function loadUser(req, res)  {
-    var reqEmail = req.query.email;
-    var reqPassword = req.query.password;
     var renderUser = function(err, userInfo) {
         if (err) {
-            res.send([{"email": email, "classes": 'There was an error'}]);
-        }
-        if(req.session.email) {
-            res.send(userInfo);
-           // req.session.email = userInfo[0].email;
-           // req.session.save();
-        }
-        else if(userInfo[0].password == reqPassword) {
-            res.send(userInfo);
-            req.session.email = userInfo[0].email;
-            req.session.save();
-        }
-        else {
-            res.status(500).send("The passwords don't match.");
+            res.send([{"classes": 'There was an error here'}]);
         }
     }
     if (true) {
-        collection.find({email: reqEmail}).limit(1).toArray(renderUser);
+        var userData = req.user.customData.classes;
+        res.send(userData);
     } else {
-        res.send([{"email": email, "classes": 'There was an error'}]);
+        res.send([{"classes": 'There was an error'}]);
     }
 }
-
-router.get('/signup', function(req, res) {
-    var reqEmail = req.query.email;
-    var reqPassword = req.query.password;
-    if (true) {
-        // this isn't working, need to check if it exists in the db or not and then go from there
-        //collection.find({email: reqEmail}).count();
-        collection.insert({email: reqEmail, password: reqPassword, classes: []});
-    } else {
-        res.send([{"email": email, "classes": 'There was an error'}]);
-    }
-});
 
 function updateTest(userEmail, className, marks, grades)   {
     collection.update({"email": userEmail}, {
