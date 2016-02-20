@@ -21,7 +21,7 @@
   /* GLOBAL VARIABLES */
   var user = null;
   var li;
-	var formModal = $('.cd-user-modal');
+  var formModal = $('.cd-user-modal');
 
   /* GLOBAL VARIABLES */
   function calcluateGrades() {
@@ -71,43 +71,6 @@
     return grades;
   }
 
-  function getUser(userEmail, userPassword)  {
-    $.getJSON("/getUser", {email: userEmail, password: userPassword}, function(data) {
-      user = data[0];
-      if(user != undefined || user != null) {
-        fillDropdown();
-        fillGrades(0);
-      }
-    });
-  }
-
-	function signUp(userEmail, userPassword)	{
-		$.getJSON("/signup", {email: userEmail, password: userPassword}, function(data) {
-      user = data[0];
-      // if(user != undefined || user != null) {
-      //   fillDropdown();
-      //   fillGrades(0);
-      // }
-    });
-	}
-
-  function fillDropdown() {
-    var classes = user.classes;
-    var list = document.getElementById("classDropdown");
-    for (var i = 0; i < classes.length; i++)  {
-      var opt = classes[i].className;
-      var li = document.createElement("li");
-      li.id = i;
-      var link = document.createElement("a");
-      var text = document.createTextNode(opt);
-      link.appendChild(text);
-      link.href = "#";
-      li.appendChild(link);
-      list.appendChild(li);
-    }
-    setDropdown();
-  }
-
   function fillGrades(x) {
     var grades = user.classes[x].grades;
     var marks = user.classes[x].marks;
@@ -122,28 +85,11 @@
 
 	// When page is loaded.
 	$(function()  {
-		var logInButton = document.getElementById('logInButton').addEventListener('click', function()  {
-			var userEmail = document.getElementById('signin-email').value;
-			var userPassword = document.getElementById('signin-password').value;
-			if(userEmail != null || userEmail != undefined) {
-				// TODO check what the response is from getUser hide as needed
-				getUser(userEmail, userPassword);
-				formModal.removeClass('is-visible');
-			}
-		});
-
-		var signupButton = document.getElementById('signupButton').addEventListener('click', function()  {
-			var userEmail = document.getElementById('signup-email').value;
-			var userPassword = document.getElementById('signup-password').value;
-			if(userEmail != null || userEmail != undefined || userPassword != null || userPassword != undefined) {
-				signUp(userEmail, userPassword);
-			}
-		});
 
 	});
 
   // Changes the Dropdown text to what class is selected
-  function setDropdown()  {
+  /*function setDropdown()  {
     $(".dropdown-menu li a").click(function(){
       $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
       $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
@@ -157,6 +103,7 @@
       }
     });
   }
+*/
 
   $(window).load(function(){
     //addDropDownClickEvent();
@@ -175,118 +122,23 @@
 <body>
   <header role="banner">
     <!-- <div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div> -->
-
     <nav class="main-nav">
       <ul>
-        <!-- inser more links here -->
-        <li><a class="cd-signin" href="#0">Sign in</a></li>
-        <li><a class="cd-signup" href="#0">Sign up</a></li>
+        <li><a class="cd-signin" href="/login">Sign in</a></li>
+        <li><a class="cd-signup" href="/register">Sign up</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
-    <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
-      <ul class="cd-switcher">
-        <li><a >Sign in</a></li>
-        <li><a >New account</a></li>
-      </ul>
 
-      <div id="cd-login"> <!-- log in form -->
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="signin-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
 
-          <p class="fieldset">
-            <label class="image-replace cd-password" for="signin-password">Password</label>
-            <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-            <a href="#0" class="hide-password">Hide</a>
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <input type="checkbox" id="remember-me" checked>
-            <label for="remember-me">Remember me</label>
-          </p>
-
-          <p class="fieldset">
-            <input class="full-width" type="button" id="logInButton" value="Login">
-          </p>
-        </form>
-
-        <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
-        <!-- <a href="#0" class="cd-close-form">Close</a> -->
-      </div> <!-- cd-login -->
-
-      <div id="cd-signup"> <!-- sign up form -->
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="signup-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <label class="image-replace cd-password" for="signup-password">Password</label>
-            <input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
-            <a href="#0" class="hide-password">Hide</a>
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <input type="checkbox" id="accept-terms">
-            <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-          </p>
-
-          <p class="fieldset">
-						<input class="full-width" type="button" id="signupButton" value="Create Account">
-          </p>
-        </form>
-
-        <!-- <a href="#0" class="cd-close-form">Close</a> -->
-      </div> <!-- cd-signup -->
-
-      <div id="cd-reset-password"> <!-- reset password form -->
-        <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
-
-        <form class="cd-form">
-          <p class="fieldset">
-            <label class="image-replace cd-email" for="reset-email">E-mail</label>
-            <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>
-          </p>
-
-          <p class="fieldset">
-            <input class="full-width has-padding" type="submit" value="Reset password">
-          </p>
-        </form>
-
-        <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
-      </div> <!-- cd-reset-password -->
-      <a href="#0" class="cd-close-form">Close</a>
-    </div> <!-- cd-user-modal-container -->
-  </div> <!-- cd-user-modal -->
-
-  <div class="cd-user-modal-container" >
-
-  <div class="dropdown" align="center" style="margin: 0px auto;" >
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Select your class
-      <span class="caret"></span>
-    </button>
-    <ul id="classDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <li><a href="#">Add class</a></li>
-      <li role="separator" class="divider"></li>
-    </ul>
-  </div>
 
 
   <div id="the-grades" >
     <table align="center" style="margin: 0px auto;">
-      <tr>
+        <div class="alert alert-info" role="alert"> Create a account to save your grades and classes! </div>
+
+        <tr>
         <th>Your grade</th>
         <th>% of grade</th>
       </tr>

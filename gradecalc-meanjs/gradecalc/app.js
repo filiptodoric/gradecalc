@@ -9,7 +9,7 @@ var users = require('./routes/users');
 var db = require('./routes/dbCalls');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-
+var stormpath = require('express-stormpath');
 var app = express();
 
 // view engine setup
@@ -21,7 +21,7 @@ app.set('view engine', 'html');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
@@ -30,6 +30,34 @@ app.use(session({
     resave: true,
     saveUninitialized: true
   }));
+
+
+app.use(stormpath.init(app, {
+    // Optional configuration options.
+    website: true,
+    apiKeyFile: process.env['~/.stormpath/apiKey.properties'],
+    //secretKey: 'some_random_long_string_here',
+    application: 'https://api.stormpath.com/v1/applications/1W002o3Q6IY8ALWNqErkAI',
+    web: {
+        login: {
+            enabled: true,
+            nextUri: "/mygrades"
+        }
+    },
+    expand: {
+        customData: true,
+    },
+    register: {
+        fields: {
+            givenName: {
+                required: false
+            },
+            surname: {
+                required: false
+            }
+        }
+    }
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
