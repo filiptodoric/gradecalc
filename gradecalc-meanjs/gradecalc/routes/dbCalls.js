@@ -70,7 +70,7 @@ function loadUser(req, res)  {
         var userData = req.user.customData.classes;
         res.send(userData);
     } else {
-        res.status(200).send({error: "Error getting the user's data"});
+        res.status(200).send([]);
     }
 }
 

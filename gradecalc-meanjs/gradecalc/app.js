@@ -42,20 +42,15 @@ app.use(stormpath.init(app, {
         login: {
             enabled: true,
             nextUri: "/mygrades"
+        },
+        register: {
+            autoAuthorize: true,
+            autoLogin: true,
+            nextUri: '/mygrades'
         }
     },
     expand: {
         customData: true,
-    },
-    register: {
-        fields: {
-            givenName: {
-                required: false
-            },
-            surname: {
-                required: false
-            }
-        }
     }
 }));
 

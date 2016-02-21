@@ -138,6 +138,12 @@
         function fillGrades(x) {
             var grades = user[x].grades;
             var marks = user[x].marks;
+            if(grades.length > 7)   {
+                for(var x = 7; x <= grades.length; x++)  {
+                    addNewRow();
+                    addKeyListeners();
+                }
+            }
             var arrayOfMarks = $(".marks");
             var arrayOfGrades = $(".grades");
             clearTextBoxes('the-grades');
@@ -191,9 +197,29 @@
             fillDropdown();
         }
 
+        function addKeyListeners()  {
+            $('.form-control').off('keypress');
+            // each time a key is pressed I need to check if it was the last one and if it is, then
+            // call addNewRow()
+            $( ".form-control").keypress(function() {
+                console.log( "Handler for .keypress() called." );
+            });
+        }
         $(window).load(function(){
-
+            addKeyListeners();
         });
+
+
+        function addNewRow()    {
+            var strVar="";
+            strVar += "<div class=\"row no-gutter\">";
+            strVar += "                    <div class=\"col-xs-1\"> <input type=\"text\" class=\"marks form-control\" maxlength=\"8\" > <\/div>";
+            strVar += "<div class=\"col-xs-1\"> <input type=\"text\" class=\"grades form-control\" maxlength=\"8\" > <\/div>";
+            strVar += "<\/div>";
+            var tableOfGrades = $('#table-of-grades');
+            tableOfGrades.append(strVar);
+
+        }
 
         function clearTextBoxes(divID)  {
             $('#' + divID).find('input:text').each(function() {
@@ -214,65 +240,72 @@
         </ul>
     </nav>
 </header>
+<div class="alert alert-info" role="alert"> </div>
 &nbsp;
 <div class="container">
     <div class="centerDiv">
-    <div class="row no-gutter">
-        <div class="col-xs-2">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select your class
-                    <span class="caret"></span>
-                </button>
-                <ul id="classDropdown" class="dropdown-menu btn-block" aria-labelledby="dropdownMenu2">
-                    <li><a href="#">Add class</a></li>
-                    <li role="separator" class="divider"></li>
-                </ul>
+        <div class="row no-gutter">
+            <div class="col-xs-2">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select your class
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="classDropdown" class="dropdown-menu btn-block" aria-labelledby="dropdownMenu2">
+                        <li><a href="#">Add class</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="the-grades">
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <h5 class="text-center">Your grade</h5> </div>
-            <div class="col-xs-1"> <h5 class="text-center">% of grade</h5> </div>
+        <div id="the-grades">
+            <div id="table-of-grades">
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <h5 class="text-center">Your grade</h5> </div>
+                    <div class="col-xs-1"> <h5 class="text-center">% of grade</h5> </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
+                </div>
+                <div class="row no-gutter">
+                    <div class="col-xs-1"> <input type="text" class="marks form-control" maxlength="8" > </div>
+                    <div class="col-xs-1"> <input type="text" class="grades form-control" maxlength="8" > </div>
+                </div>
+            </div>
+            <div class="row no-gutter">
+                <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
+            </div>
+            <div class="row no-gutter" >
+                <div class="col-xs-1"> <h6>Current grade:</h6> </div>
+                <div class="col-xs-1"> <h5 class="text-right" id="currentGrade"></h5> </div>
+            </div>
+            <div class="row no-gutter" >
+                <div class="col-xs-1"> <h6> Total grade: </h6> </div>
+                <div class="col-xs-1"> <h5 class="text-right" id="totalGrade"></h5> </div>
+            </div>
         </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 22/30"> </div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
-            <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
-        </div>
-        <div class="row no-gutter" >
-            <div class="col-xs-1"> <h6>Current grade:</h6> </div>
-            <div class="col-xs-1"> <h5 class="text-right" id="currentGrade"></h5> </div>
-        </div>
-        <div class="row no-gutter" >
-            <div class="col-xs-1"> <h6> Total grade: </h6> </div>
-            <div class="col-xs-1"> <h5 class="text-right" id="totalGrade"></h5> </div>
-        </div>
-    </div>
     </div>
 </div>
 <!-- Modal -->
@@ -284,7 +317,7 @@
                 <h4 class="modal-title" id="myModalLabel">Add a new class</h4>
             </div>
             <div class="modal-body">
-                <div class="row no-gutter">
+                <div class="row no-gutter some-margin">
                     <div class="col-sm-3"> <h5>Class name/code: </h5> </div>
                     <div class="col-sm-4"> <input type="text" class="form-control" id="newClassName" > </div>
                 </div>
