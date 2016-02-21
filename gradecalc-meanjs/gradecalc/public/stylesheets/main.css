@@ -43,3 +43,9 @@ h6, .h6 {
 h5, .h5 {
     font-size: 17px;
 }
+
+footer {
+    position: relative;
+    background: #343642;
+    color: #FFF;
+}
