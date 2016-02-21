@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var db = require('./routes/dbCalls');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+//var session = require('express-session');
+//var MongoStore = require('connect-mongo')(session);
 var stormpath = require('express-stormpath');
 var app = express();
 
@@ -23,14 +23,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-app.use(session({
-    store: new MongoStore({url: 'mongodb://localhost:27017/gradecalc'}),
-    secret: "This is a secret.",
-    resave: true,
-    saveUninitialized: true
-  }));
-
 
 app.use(stormpath.init(app, {
     // Optional configuration options.

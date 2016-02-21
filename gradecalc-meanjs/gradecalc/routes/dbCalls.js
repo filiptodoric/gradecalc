@@ -1,30 +1,6 @@
-var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
-var url = 'mongodb://localhost:27017/gradecalc';
 var express = require('express');
 var router = express.Router();
 var stormpath = require('express-stormpath');
-
-
-var collection;
-
-var connectToDBs = function(callback) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) {
-            console.log('Unable to connect to the mongoDB server. Error:', err);
-            throw err;
-        }
-        console.log('Connection established to', url);
-        collection = db.collection('users');
-
-        if (callback) {
-            callback();
-        }
-    });
-}
-
-// connect to the database
-connectToDBs();
 
 router.get('/', function(req, res, next) {
     if (req.user == undefined) {
