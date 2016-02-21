@@ -30,6 +30,9 @@
                     finalMark = finalMark + (marks[i] * (grades[i]/100));
                 }
                 saveGrades();
+                // update the grades on the client
+                user[classIndexId].marks = marks;
+                user[classIndexId].grades = grades;
             }
             else {
                 error();
@@ -169,6 +172,7 @@
                 }
             });
             $("#myModal").modal('hide');
+            // add the class to the clientside as well
             var clientSide = {className: newClassCode, grades: [], marks: []};
             user.push(clientSide);
             clearDropdown();
