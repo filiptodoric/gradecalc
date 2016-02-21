@@ -81,11 +81,18 @@
         }
 
         function getUser()  {
-            $.getJSON("/getUser", function(data) {
-                user = data;
-                if(user != undefined || user != null) {
+            $.ajax({
+                type: "GET",
+                url: '/getUser',
+                contentType: 'json',
+                success: function(data) {
+                    user = data;
                     fillDropdown();
                     fillGrades(0);
+                },
+                error: function(data)    {
+                    console.error(data)
+                    user = [];
                 }
             });
         }
@@ -107,6 +114,12 @@
             setDropdown();
         }
 
+        function clearDropdown()    {
+            var myDropdown = $('.dropdown-menu').children();
+            for(var i = 2; i < myDropdown.length; i++)  {
+                myDropdown[i].remove();
+            }
+        }
         function fillGrades(x) {
             var grades = user[x].grades;
             var marks = user[x].marks;
@@ -148,12 +161,18 @@
             $.ajax({
                 type: "POST",
                 url: '/addNewClass',
-                contentType: 'json',
-                data: { className: newClassCode },
-                success: function () {
+                dataType: 'json',
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({ className: newClassCode }),
+                success: function(data) {
                     $("#myModal").modal('hide');
                 }
-            })
+            });
+            $("#myModal").modal('hide');
+            var clientSide = {className: newClassCode, grades: [], marks: []};
+            user.push(clientSide);
+            clearDropdown();
+            fillDropdown();
         }
 
         $(window).load(function(){

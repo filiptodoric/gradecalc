@@ -54,57 +54,26 @@ router.post('/savegrades', stormpath.loginRequired, function(req, res)  {
 });
 
 router.post('/addNewClass', stormpath.loginRequired, function(req, res)  {
-    var className = req.body.className;
-    var newClass = {className: className,
-    grades: [],
-    marks: []
-    };
+    var newClassName = req.body.className;
+    var newClass = {className: newClassName, grades: [], marks: []};
+    if(req.user.customData.classes == undefined)    {
+        req.user.customData.classes = [];
+    }
     req.user.customData.classes.push(newClass);
     req.user.customData.save();
     res.sendStatus(200);
 });
+
 function loadUser(req, res)  {
-    var renderUser = function(err, userInfo) {
-        if (err) {
-            res.send([{"classes": 'There was an error here'}]);
-        }
-    }
-    if (true) {
+    var userData = req.user.customData.classes;
+    if (userData != null || userData != undefined) {
         var userData = req.user.customData.classes;
         res.send(userData);
     } else {
-        res.send([{"classes": 'There was an error'}]);
+        res.status(200).send({error: "Error getting the user's data"});
     }
 }
 
-function updateTest(userEmail, className, marks, grades)   {
-    collection.update({"email": userEmail}, {
-        $push: {
-            "classes": {
-                "className": className,
-                "marks": marks,
-                "grades": grades
-            }
-        }
-    });
-}
-
-var newClass = {
-    className: 'CCCC3333',
-    marks: [75, 85, 95],
-    grades: [20, 30, 50]
-};
-
-
-function deleteClass(className, email)  {
-    collection.update({"email": email}, {
-        $pull: {
-            "classes": {
-                "className": className
-            }
-        }
-    });
-}
 
 
 module.exports = router;
