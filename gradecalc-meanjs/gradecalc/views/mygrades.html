@@ -24,10 +24,14 @@
         function calcluateGrades() {
             var marks = getMarks();
             var grades = getGrades();
-            var finalMark = 0;
+            var totalGrade = 0;
+            var currentGrade = 0;
+            var totalGradeAvailible = 0;
+            // calculate total grade
             if (marks.length == grades.length) {
                 for(var i = 0; i < marks.length; i++)  {
-                    finalMark = finalMark + (marks[i] * (grades[i]/100));
+                    totalGrade = totalGrade + (marks[i] * (grades[i]/100));
+                    totalGradeAvailible += grades[i];
                 }
                 saveGrades();
                 // update the grades on the client
@@ -37,8 +41,16 @@
             else {
                 error();
             }
-            $("#finalGrade").html(finalMark.toFixed(1) + "%");
+            // calculate current grade
+            currentGrade = totalGrade/totalGradeAvailible;
+            currentGrade = currentGrade*100;
+            if(isNaN(currentGrade)) {
+                currentGrade = 0;
+            }
+            $("#totalGrade").html(totalGrade.toFixed(1) + "%");
+            $("#currentGrade").html(currentGrade.toFixed(1) + "%");
         }
+
 
         function error()  {
             console.log("A grade or mark is missing");
@@ -252,8 +264,13 @@
         <div class="row no-gutter">
             <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
         </div>
-        <div class="row no-gutter">
-            <div class="col-xs-2"> <div id="finalGrade"> </div> </div>
+        <div class="row no-gutter" >
+            <div class="col-xs-1"> <h6>Current grade:</h6> </div>
+            <div class="col-xs-1"> <h5 class="text-right" id="currentGrade"></h5> </div>
+        </div>
+        <div class="row no-gutter" >
+            <div class="col-xs-1"> <h6> Total grade: </h6> </div>
+            <div class="col-xs-1"> <h5 class="text-right" id="totalGrade"></h5> </div>
         </div>
     </div>
     </div>
