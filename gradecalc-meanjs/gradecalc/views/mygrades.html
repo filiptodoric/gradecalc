@@ -201,7 +201,7 @@
             var inputs = $('.form-control');
             var lastGradeInput = inputs[inputs.length - 3];
             var alreadyAdded = false;
-            $('.form-control').off('keypress');
+            inputs.off('keypress');
             // each time a key is pressed I need to check if it was the last one and if it is, then
             // call addNewRow()
             $(lastGradeInput).keypress(function() {
@@ -212,10 +212,10 @@
                 }
             });
         }
+
         $(window).load(function(){
             addKeyListeners();
         });
-
 
         function addNewRow()    {
             var strVar="";
