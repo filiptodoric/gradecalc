@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(stormpath.init(app, {
     // Optional configuration options.
     website: true,
-    apiKeyFile: process.env['~/.stormpath/apiKey.properties'],
+    apiKeyFile: '5QLUXMAJEUKGZC91E75DWYNRV',//process.env['~/.stormpath/apiKey.properties'],
     //secretKey: 'some_random_long_string_here',
     application: 'https://api.stormpath.com/v1/applications/1W002o3Q6IY8ALWNqErkAI',
     web: {
