@@ -13,6 +13,12 @@
     border-color: #FFFFFF;
 }
 
+.centered {
+    width:300px;
+    margin: 0 auto;
+}
+
+
 .btn-default:focus,
 .btn-default.focus {
 /*    color: #ffffff;
