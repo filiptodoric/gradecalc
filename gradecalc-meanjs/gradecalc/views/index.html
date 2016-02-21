@@ -92,14 +92,28 @@
                 arrayOfGrades[x].value = grades[x];
             }
         }
+        function addKeyListeners()  {
+            var inputs = $('.form-control');
+            var lastGradeInput = inputs[inputs.length - 3];
+            var alreadyAdded = false;
+            $('.form-control').off('keypress');
+            // each time a key is pressed I need to check if it was the last one and if it is, then
+            // call addNewRow()
+            $(lastGradeInput).keypress(function() {
+                if(alreadyAdded == false)   {
+                    addNewRow();
+                    alreadyAdded = true;
+                    addKeyListeners();
+                }
+            });
+        }
+        $(window).load(function(){
+            addKeyListeners();
+        });
 
         // When page is loaded.
         $(function()  {
 
-        });
-
-        $(window).load(function(){
-            //addDropDownClickEvent();
         });
 
         function clearTextBoxes(divID)  {
