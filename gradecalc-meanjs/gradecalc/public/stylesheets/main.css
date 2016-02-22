@@ -11,6 +11,7 @@
     color: #ffffff;
     background-color: #2F88AA;
     border-color: #FFFFFF;
+    font-weight: bold;
 }
 
 .centered {
@@ -55,10 +56,20 @@ h5, .h5 {
     font-size: 17px;
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 600;
+}
+
 footer {
-    position: relative;
+    position: absolute;
     background: #343642;
     color: #FFF;
+    bottom: 0;
+    width: 100%;
+}
+
+body {
+    background-color: #e9eaed;
 }
 
 
@@ -82,4 +93,12 @@ footer {
 .table-button {
     width:100%;
     float:left;
+}
+
+/* Sign in and sign up look proper on mobile!*/
+a, ul{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
 }
