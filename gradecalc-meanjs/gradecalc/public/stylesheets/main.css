@@ -60,3 +60,11 @@ footer {
     background: #343642;
     color: #FFF;
 }
+
+
+.container-fluid { 	margin: 5px; }
+.centerDiv { 	 margin: 5px; }
+.row {
+    display: flex;
+    justify-content: center;
+}
