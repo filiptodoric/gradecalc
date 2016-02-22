@@ -215,6 +215,12 @@
 
         $(window).load(function(){
             addKeyListeners();
+
+            // Mobile menu dropdown
+            var mainNav = $('.main-nav');
+            mainNav.on('click', function(event){
+                $(event.target).is(mainNav) && mainNav.children('ul').toggleClass('is-visible');
+            });
         });
 
         function addNewRow()    {
