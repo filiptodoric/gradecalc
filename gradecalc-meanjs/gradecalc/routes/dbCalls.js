@@ -4,7 +4,7 @@ var stormpath = require('express-stormpath');
 
 router.get('/', function(req, res, next) {
     if (req.user == undefined) {
-        res.render('index');
+        res.render('../views/index');
     }
     else {
         res.redirect('/mygrades');
