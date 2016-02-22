@@ -76,10 +76,10 @@ footer {
 }
 
 .table-cell {
-    width:40%;
+    width:50%;
     float:left;
 }
 .table-button {
-    width:80%;
+    width:100%;
     float:left;
 }
