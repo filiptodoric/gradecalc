@@ -62,9 +62,24 @@ footer {
 }
 
 
-.container-fluid { 	margin: 5px; }
+/*.container-fluid { 	margin: 5px; }
 .centerDiv { 	 margin: 5px; }
 .row {
     display: flex;
     justify-content: center;
+    min-width: 350px;
+}*/
+
+#content {
+    display: table;
+    margin: auto;
+}
+
+.table-cell {
+    width:40%;
+    float:left;
+}
+.table-button {
+    width:80%;
+    float:left;
 }

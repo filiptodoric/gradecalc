@@ -225,9 +225,9 @@
 
         function addNewRow()    {
             var strVar="";
-            strVar += "<div class=\"row no-gutter\">";
-            strVar += "                    <div class=\"col-xs-1\"> <input type=\"text\" class=\"marks form-control\" maxlength=\"8\" > <\/div>";
-            strVar += "<div class=\"col-xs-1\"> <input type=\"text\" class=\"grades form-control\" maxlength=\"8\" > <\/div>";
+            strVar += "<div class=\"table-row\">";
+            strVar += "                    <div class=\"table-cell\"> <input type=\"text\" class=\"marks form-control\" maxlength=\"8\" > <\/div>";
+            strVar += "<div class=\"table-cell\"> <input type=\"text\" class=\"grades form-control\" maxlength=\"8\" > <\/div>";
             strVar += "<\/div>";
             var tableOfGrades = $('#table-of-grades');
             tableOfGrades.append(strVar);
@@ -256,67 +256,72 @@
 <div class="alert alert-info" role="alert"> </div>
 
 <div class="container-fluid">
-    <div class="">
-        <div class="row no-gutter">
-            <div class="col-xs-2">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select your class
-                        <span class="caret"></span>
-                    </button>
-                    <ul id="classDropdown" class="dropdown-menu btn-block" aria-labelledby="dropdownMenu2">
-                        <li><a href="#">Add class</a></li>
-                        <li role="separator" class="divider"></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div class="row no-gutter">
+        <div class="col-xs-12 text-center">
+            <div id="content">
 
-        <div id="the-grades">
-            <div id="table-of-grades">
-                <div class="row no-gutter">
-                    <div class="col-xs-1"><h5 class="text-center">Your grade</h5> </div>
-                    <div class="col-xs-1"> <h5 class="text-center">% of grade</h5> </div>
+                <div class="table-row">
+                    <div class="table-button">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select your class
+                                <span class="caret"></span>
+                            </button>
+                            <ul id="classDropdown" class="dropdown-menu btn-block" aria-labelledby="dropdownMenu2">
+                                <li><a href="#">Add class</a></li>
+                                <li role="separator" class="divider"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"><input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+
+                <div id="the-grades">
+                    <div id="table-of-grades">
+                        <div class="table-row">
+                            <div class="table-cell"><h5 class="text-center">Your grade</h5> </div>
+                            <div class="table-cell"> <h5 class="text-center">% of grade</h5> </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"><input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-button"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
+                    </div>
+                    <div class="table-row" >
+                        <div class="table-cell"> <h6 class="text-left" >Current grade:</h6> </div>
+                        <div class="table-cell"> <h5 class="text-right" id="currentGrade"> 0.0%</h5> </div>
+                    </div>
+                    <div class="table-row" >
+                        <div class="table-cell"> <h6 class="text-left" > Total grade: </h6> </div>
+                        <div class="table-cell"> <h5 class="text-right" id="totalGrade"> 0.0% </h5> </div>
+                    </div>
                 </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
-                </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
-                </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
-                </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
-                </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
-                </div>
-                <div class="row no-gutter">
-                    <div class="col-xs-1"> <input type="text" class="marks form-control" maxlength="8" > </div>
-                    <div class="col-xs-1"> <input type="text" class="grades form-control" maxlength="8" > </div>
-                </div>
-            </div>
-            <div class="row no-gutter">
-                <div class="col-xs-2"> <button type="button" id="markButton" onclick="calcluateGrades()" class="btn btn-default btn-block">What's my mark?</button> </div>
-            </div>
-            <div class="row no-gutter" >
-                <div class="col-xs-1"> <h6>Current grade:</h6> </div>
-                <div class="col-xs-1"> <h5 class="text-right" id="currentGrade"></h5> </div>
-            </div>
-            <div class="row no-gutter" >
-                <div class="col-xs-1"> <h6> Total grade: </h6> </div>
-                <div class="col-xs-1"> <h5 class="text-right" id="totalGrade"></h5> </div>
             </div>
         </div>
     </div>
@@ -335,7 +340,7 @@
                 <h4 class="modal-title" id="myModalLabel">Add a new class</h4>
             </div>
             <div class="modal-body">
-                <div class="row no-gutter some-margin">
+                <div class="table-row some-margin">
                     <div class="col-sm-3"> <h5>Class name/code: </h5> </div>
                     <div class="col-sm-4"> <input type="text" class="form-control" id="newClassName" > </div>
                 </div>
