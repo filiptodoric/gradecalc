@@ -15,139 +15,17 @@
 
         ga('create', 'UA-69193468-2', 'auto');
         ga('send', 'pageview');
-
     </script>
     <link rel="stylesheet" href="stylesheets/nav.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="stylesheets/main.css">
-
     <title>GradeCalc - Your Simple Final Grade Calculator</title>
-
     <script>
-
-        /* GLOBAL VARIABLES */
-        var user = [];
-        var li;
-        /* GLOBAL VARIABLES */
-
-        function calcluateGrades() {
-            var marks = getMarks();
-            var grades = getGrades();
-            var totalGrade = 0;
-            var currentGrade = 0;
-            var totalGradeAvailible = 0;
-            // calculate total grade
-            if (marks.length == grades.length) {
-                for(var i = 0; i < marks.length; i++)  {
-                    totalGrade = totalGrade + (marks[i] * (grades[i]/100));
-                    totalGradeAvailible += grades[i];
-                }
-            }
-            else {
-                error();
-            }
-            // calculate current grade
-            currentGrade = totalGrade/totalGradeAvailible;
-            currentGrade = currentGrade*100;
-            if(isNaN(currentGrade)) { currentGrade = 0; }
-            if(isNaN(totalGrade)) { totalGrade = 0; }
-            if(totalGradeAvailible > 100)   {
-                $("#totalGrade").html("N/A");
-            }
-            else    {
-                $("#totalGrade").html(totalGrade.toFixed(2) + "%");
-            }
-            $("#currentGrade").html(currentGrade.toFixed(2) + "%");
-
-        }
-
-        function error()  {
-            console.log("A grade or mark is missing");
-        }
-
-
-        // TODO: these functions need to be generalized
-        function getMarks() {
-            var arrayOfMarks = $(".marks");
-            var marks = [];
-            var x = 0;
-            $.each(arrayOfMarks , function(index, value){
-                var trimedValue = value.value.trim();
-                if (trimedValue !== "")  {
-                    marks[x] = parseFloat(trimedValue);
-                }
-                x++;
-            });
-            return marks;
-        }
-
-        function getGrades() {
-            var arrayOfGrades = $(".grades");
-            var grades = [];
-            var x = 0;
-            $.each(arrayOfGrades , function(index, value){
-                var trimedValue = value.value.trim();
-                if (trimedValue !== "")  {
-                    grades[x] = parseFloat(trimedValue);
-                }
-                x++;
-            });
-            return grades;
-        }
-
-        function addNewRow()    {
-            var strVar="";
-            strVar += "<div class=\"table-row\">";
-            strVar += "                    <div class=\"table-cell\"> <input type=\"text\" class=\"marks form-control\" maxlength=\"8\" > <\/div>";
-            strVar += "<div class=\"table-cell\"> <input type=\"text\" class=\"grades form-control\" maxlength=\"8\" > <\/div>";
-            strVar += "<\/div>";
-            var tableOfGrades = $('#table-of-grades');
-            tableOfGrades.append(strVar);
-        }
-
-        function addKeyListeners()  {
-            var inputs = $('.form-control');
-            var lastGradeInput = inputs[inputs.length - 2];
-            var alreadyAdded = false;
-            inputs.off('keypress');
-            // each time a key is pressed I need to check if it was the last one and if it is, then
-            // call addNewRow()
-            $(lastGradeInput).keypress(function() {
-                if(alreadyAdded == false)   {
-                    addNewRow();
-                    alreadyAdded = true;
-                    addKeyListeners();
-                }
-            });
-        }
-
-        $(window).load(function(){
-            addKeyListeners();
-
-            // Mobile menu dropdown
-            var mainNav = $('.main-nav');
-            mainNav.on('click', function(event){
-                $(event.target).is(mainNav) && mainNav.children('ul').toggleClass('is-visible');
-            });
-
-            // enter key now presses the mark button
-            $(document).keypress(function(e){
-                if (e.which == 13){
-                    $("#markButton").click();
-                }
-            });
-
-        });
-
-        function clearTextBoxes(divID)  {
-            $('#' + divID).find('input:text').each(function() {
-                        $(this).val('');
-                    }
-            );
-        }
+        var user=[],li;function calcluateGrades(){var a=getMarks(),c=getGrades(),b=0,d=0,e=0;if(a.length==c.length)for(d=0;d<a.length;d++)b+=c[d]/100*a[d],e+=c[d];else error();d=b/e*100;isNaN(d)&&(d=0);isNaN(b)&&(b=0);100<e?$("#totalGrade").html("N/A"):$("#totalGrade").html(b.toFixed(2)+"%");$("#currentGrade").html(d.toFixed(2)+"%")}function error(){console.log("A grade or mark is missing")}
+        function getMarks(){var a=$(".marks"),c=[],b=0;$.each(a,function(a,e){var f=e.value.trim();""!==f&&(c[b]=parseFloat(f));b++});return c}function getGrades(){var a=$(".grades"),c=[],b=0;$.each(a,function(a,e){var f=e.value.trim();""!==f&&(c[b]=parseFloat(f));b++});return c}
+        function addNewRow(){var a;a='<div class="table-row">                    <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>';a+='<div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>';a+="</div>";$("#table-of-grades").append(a)}function addKeyListeners(){var a=$(".form-control"),c=a[a.length-2],b=!1;a.off("keypress");$(c).keypress(function(){0==b&&(addNewRow(),b=!0,addKeyListeners())})}
+        $(window).load(function(){addKeyListeners();var a=$(".main-nav");a.on("click",function(c){$(c.target).is(a)&&a.children("ul").toggleClass("is-visible")});$(document).keypress(function(a){13==a.which&&$("#markButton").click()})});function clearTextBoxes(a){$("#"+a).find("input:text").each(function(){$(this).val("")})};
     </script>
-
-
 </head>
 <body>
 <header role="banner">
