@@ -59,9 +59,9 @@
                 $("#totalGrade").html("N/A");
             }
             else    {
-                $("#totalGrade").html(totalGrade.toFixed(1) + "%");
+                $("#totalGrade").html(totalGrade.toFixed(2) + "%");
             }
-            $("#currentGrade").html(currentGrade.toFixed(1) + "%");
+            $("#currentGrade").html(currentGrade.toFixed(2) + "%");
         }
 
         function makeClassIndexIdNotUndefined()   {
@@ -93,7 +93,7 @@
             $.each(arrayOfMarks , function(index, value){
                 var trimedValue = value.value.trim();
                 if (trimedValue !== "")  {
-                    marks[x] = parseInt(trimedValue);
+                    marks[x] = parseFloat(trimedValue);
                 }
                 x++;
             });
@@ -107,7 +107,7 @@
             $.each(arrayOfGrades , function(index, value){
                 var trimedValue = value.value.trim();
                 if (trimedValue !== "")  {
-                    grades[x] = parseInt(trimedValue);
+                    grades[x] = parseFloat(trimedValue);
                 }
                 x++;
             });
@@ -302,7 +302,7 @@
                     <div id="table-of-grades">
                         <div class="table-row">
                             <div class="table-cell"><h4 class="text-center">Your grade</h4> </div>
-                            <div class="table-cell"> <h4 class="text-center">% of grade</h4> </div>
+                            <div class="table-cell"> <h4 class="text-center">Weight</h4> </div>
                         </div>
                         <div class="table-row">
                             <div class="table-cell"><input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
@@ -313,8 +313,8 @@
                             <div class="table-cell"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark3" maxlength="8" ></div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade3" maxlength="8" ></div>
+                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark3" maxlength="8" placeholder="ex 91.23"></div>
+                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade3" maxlength="8" placeholder="ex 5"></div>
                         </div>
                         <div class="table-row">
                             <div class="table-cell"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
@@ -338,16 +338,17 @@
                     </div>
                     <div class="table-row" >
                         <div class="table-cell"> <h4 class="text-left" >Current grade:</h4> </div>
-                        <div class="table-cell"> <h4 class="text-right" id="currentGrade"> 0.0%</h4> </div>
+                        <div class="table-cell"> <h4 class="text-right" id="currentGrade"> 0.00%</h4> </div>
                     </div>
                     <div class="table-row" >
                         <div class="table-cell"> <h4 class="text-left" > Total grade: </h4> </div>
-                        <div class="table-cell"> <h4 class="text-right" id="totalGrade"> 0.0% </h4> </div>
+                        <div class="table-cell"> <h4 class="text-right" id="totalGrade"> 0.00% </h4> </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    &nbsp;
 </div>
 <!--<footer>
     <h6 class="text-left" style="padding-left: 1%; padding-top: 1%"></h6>
