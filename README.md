@@ -1,5 +1,5 @@
 # gradecalc
 
-This is the code behind gradecalc.co
+Visit www.gradecalc.co to see it in action! 
 
 Created by Filip Todoric
