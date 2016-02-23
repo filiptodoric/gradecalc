@@ -244,6 +244,13 @@
             mainNav.on('click', function(event){
                 $(event.target).is(mainNav) && mainNav.children('ul').toggleClass('is-visible');
             });
+
+            // enter key now presses the mark button
+            $(document).keypress(function(e){
+                if (e.which == 13){
+                    $("#markButton").click();
+                }
+            });
         });
 
         function addNewRow()    {
