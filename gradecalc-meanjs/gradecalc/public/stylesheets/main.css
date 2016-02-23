@@ -111,3 +111,9 @@ a, ul{
 .modal-footer {
     border-top: 0;
 }
+
+.alert .alert-link {
+    font-weight: bolder;
+    color: #fff;
+    text-decoration: inherit;
+}
