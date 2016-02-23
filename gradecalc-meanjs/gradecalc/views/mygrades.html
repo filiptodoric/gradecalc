@@ -122,6 +122,7 @@
                 success: function(data) {
                     user = data;
                     fillDropdown();
+                    classIndexId = 0;
                     fillGrades(0);
                 },
                 error: function(data)    {
@@ -263,6 +264,32 @@
             });
         });
 
+        function confirmDelete(classIndexId)    {
+            var deleteConfirmation = confirm("Are you sure you want to delete this class?");
+            if(deleteConfirmation) {
+                deleteClass(classIndexId);
+            }
+        }
+
+        function deleteClass(classIndexId)  {
+            //on success close the modal window
+            var toDeleteId = classIndexId;
+            $.ajax({
+                type: "POST",
+                url: '/deleteclass',
+                dataType: 'json',
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({ classIndex: toDeleteId }),
+                success: function(data) {
+                    //$("#myModal").modal('hide');
+                }
+            });
+            user.splice(toDeleteId, 1);
+            clearDropdown();
+            fillDropdown();
+            setVisibleClassInDropdown(0);
+        }
+
         function addNewRow()    {
             var strVar="";
             strVar += "<div class=\"table-row dynamically-added\">";
@@ -290,6 +317,7 @@
     <div id="cd-logo"><h1 href="/" style="color: ghostwhite; margin-top: auto">GradeCalc.co</h1></div>
     <nav class="main-nav">
         <ul>
+            <li><button class="cd-button" onclick="confirmDelete(classIndexId)" id="deleteClassButton">Delete this class</button></li>
             <li><a class="cd-signup" href="/logout">Log out</a></li>
         </ul>
     </nav>

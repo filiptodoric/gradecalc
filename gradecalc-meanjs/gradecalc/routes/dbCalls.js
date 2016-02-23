@@ -29,6 +29,15 @@ router.post('/savegrades', stormpath.loginRequired, function(req, res)  {
     res.sendStatus(200);
 });
 
+router.post('/deleteclass', stormpath.loginRequired, function(req, res)  {
+    var classIndex = req.body.classIndex;
+    var classes = req.user.customData.classes;
+    classes.splice(classIndex, 1);
+    req.user.customData.classes = classes;
+    req.user.customData.save();
+    res.sendStatus(200);
+});
+
 router.post('/addNewClass', stormpath.loginRequired, function(req, res)  {
     var newClassName = req.body.className;
     var newClass = {className: newClassName, grades: [], marks: []};

@@ -153,17 +153,22 @@ header[role=banner]::after {
   .main-nav li:nth-last-child(2) {
     margin-left: 2em;
   }
-  .main-nav a {
+  .main-nav a, .main-nav button.cd-button {
     display: inline-block;
     height: auto;
     line-height: normal;
     background: transparent;
   }
-  .main-nav a.cd-signin, .main-nav a.cd-signup {
+  .main-nav a.cd-signin, .main-nav a.cd-signup, .main-nav button.cd-button {
     padding: .6em 1em;
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 50em;
   }
+
+  .main-nav button.cd-button {
+    color: ghostwhite;
+  }
+
   .main-nav a.cd-signup {
     background: #2f889a;
     border: none;
