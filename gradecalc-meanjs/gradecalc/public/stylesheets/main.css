@@ -103,3 +103,8 @@ a, ul{
     border: 0;
     vertical-align: baseline;
 }
+
+/* gets rid of weird add class button */
+.modal-footer {
+    border-top: 0;
+}
