@@ -92,6 +92,7 @@ body {
 .table-cell {
     width:50%;
     float:left;
+    max-width: 285px;
 }
 .table-button {
     width:100%;
