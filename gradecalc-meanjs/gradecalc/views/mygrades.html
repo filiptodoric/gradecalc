@@ -64,6 +64,35 @@
             $("#currentGrade").html(currentGrade.toFixed(2) + "%");
         }
 
+        //TODO this function should be genralized with the one above. Messy code.
+        function refreshGrades() {
+            var marks = getMarks();
+            var grades = getGrades();
+            var totalGrade = 0;
+            var currentGrade = 0;
+            var totalGradeAvailible = 0;
+            if (marks.length == grades.length) {
+                for(var i = 0; i < marks.length; i++)  {
+                    totalGrade = totalGrade + (marks[i] * (grades[i]/100));
+                    totalGradeAvailible += grades[i];
+                }
+            }
+            else {
+                error();
+            }
+            currentGrade = totalGrade/totalGradeAvailible;
+            currentGrade = currentGrade*100;
+            if(isNaN(currentGrade)) { currentGrade = 0; }
+            if(isNaN(totalGrade)) { totalGrade = 0; }
+            if(totalGradeAvailible > 100)   {
+                $("#totalGrade").html("N/A");
+            }
+            else    {
+                $("#totalGrade").html(totalGrade.toFixed(2) + "%");
+            }
+            $("#currentGrade").html(currentGrade.toFixed(2) + "%");
+        }
+
         function makeClassIndexIdNotUndefined()   {
             if(classIndexId == undefined)  {
                 classIndexId = 0;
@@ -172,6 +201,7 @@
                 arrayOfMarks[x].value = marks[x];
                 arrayOfGrades[x].value = grades[x];
             }
+            refreshGrades();
         }
 
 
