@@ -187,7 +187,7 @@
                 var classIndexAsString = this.parentNode.id;
                 classIndexId = parseInt(classIndexAsString);
                 if(classIndexAsString == "")  {
-                    $("#myModal").modal('toggle');
+                    $("#myModal").modal('show');
                 }
                 else if(classIndexId == undefined)  {
                     classIndexId = 0;
@@ -209,10 +209,11 @@
                 contentType: 'application/json; charset=UTF-8',
                 data: JSON.stringify({ className: newClassCode }),
                 success: function(data) {
-                    $("#myModal").modal('hide');
+                    //$("#myModal").modal('hide');
                 }
             });
             $("#myModal").modal('hide');
+            $("#newClassName").val("");
             // add the class to the clientside as well
             var clientSide = {className: newClassCode, grades: [], marks: []};
             user.push(clientSide);
