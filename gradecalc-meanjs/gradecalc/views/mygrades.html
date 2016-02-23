@@ -35,6 +35,7 @@
             var totalGrade = 0;
             var currentGrade = 0;
             var totalGradeAvailible = 0;
+            makeClassIndexIdNotUndefined();
             // calculate total grade
             if (marks.length == grades.length) {
                 for(var i = 0; i < marks.length; i++)  {
@@ -52,20 +53,28 @@
             // calculate current grade
             currentGrade = totalGrade/totalGradeAvailible;
             currentGrade = currentGrade*100;
-            if(isNaN(currentGrade)) {
-                currentGrade = 0;
+            if(isNaN(currentGrade)) { currentGrade = 0; }
+            if(isNaN(totalGrade)) { totalGrade = 0; }
+            if(totalGradeAvailible > 100)   {
+                $("#totalGrade").html("N/A");
             }
-            $("#totalGrade").html(totalGrade.toFixed(1) + "%");
+            else    {
+                $("#totalGrade").html(totalGrade.toFixed(1) + "%");
+            }
             $("#currentGrade").html(currentGrade.toFixed(1) + "%");
         }
 
+        function makeClassIndexIdNotUndefined()   {
+            if(classIndexId == undefined)  {
+                classIndexId = 0;
+            }
+        }
 
         function error()  {
             console.log("A grade or mark is missing");
         }
 
         function saveGrades() {
-            // TODO: Grades needs to be refreshed after save on the client
             var marksToSend = getMarks();
             var gradesToSend = getGrades();
             $.post("/savegrades",
@@ -82,8 +91,9 @@
             var marks = [];
             var x = 0;
             $.each(arrayOfMarks , function(index, value){
-                if (value.value !== "")  {
-                    marks[x] = parseInt(value.value);
+                var trimedValue = value.value.trim();
+                if (trimedValue !== "")  {
+                    marks[x] = parseInt(trimedValue);
                 }
                 x++;
             });
@@ -95,8 +105,9 @@
             var grades = [];
             var x = 0;
             $.each(arrayOfGrades , function(index, value){
-                if (value.value !== "")  {
-                    grades[x] = parseInt(value.value);
+                var trimedValue = value.value.trim();
+                if (trimedValue !== "")  {
+                    grades[x] = parseInt(trimedValue);
                 }
                 x++;
             });
@@ -146,12 +157,13 @@
         function fillGrades(x) {
             var grades = user[x].grades;
             var marks = user[x].marks;
+            $(".table-row.dynamically-added").remove();
             if(grades.length > 7)   {
                 for(var x = 7; x <= grades.length; x++)  {
                     addNewRow();
-                    addKeyListeners();
                 }
             }
+            addKeyListeners();
             var arrayOfMarks = $(".marks");
             var arrayOfGrades = $(".grades");
             clearTextBoxes('the-grades');
@@ -160,6 +172,7 @@
                 arrayOfGrades[x].value = grades[x];
             }
         }
+
 
         // When page is loaded.
         $(function()  {
@@ -172,13 +185,15 @@
                 $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
                 $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
                 var classIndexAsString = this.parentNode.id;
+                classIndexId = parseInt(classIndexAsString);
                 if(classIndexAsString == "")  {
-                    // add a new class
-                    // open modal window, add a class name, post it to server, refresh
                     $("#myModal").modal('toggle');
                 }
+                else if(classIndexId == undefined)  {
+                    classIndexId = 0;
+                    fillGrades(classIndexId);
+                }
                 else {
-                    classIndexId = parseInt(classIndexAsString);
                     fillGrades(classIndexId);
                 }
             });
@@ -233,7 +248,7 @@
 
         function addNewRow()    {
             var strVar="";
-            strVar += "<div class=\"table-row\">";
+            strVar += "<div class=\"table-row dynamically-added\">";
             strVar += "                    <div class=\"table-cell\"> <input type=\"text\" class=\"marks form-control\" maxlength=\"8\" > <\/div>";
             strVar += "<div class=\"table-cell\"> <input type=\"text\" class=\"grades form-control\" maxlength=\"8\" > <\/div>";
             strVar += "<\/div>";
@@ -261,7 +276,7 @@
         </ul>
     </nav>
 </header>
-<div class="alert alert-info" role="alert"> </div>
+<div class="alert alert-info text-center" id="welcome-back" role="alert"> </div>
 
 <div class="container-fluid">
     <div class="row no-gutter">
