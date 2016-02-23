@@ -199,6 +199,14 @@
             });
         }
 
+        function setVisibleClassInDropdown(classID)    {
+            var className = $(".dropdown-menu li").filter($('#' + classID)).children().html();
+            var dropdown = $(".dropdown-menu li a");
+            dropdown.parents(".dropdown").find('.btn').html(className + ' <span class="caret"></span>');
+            classIndexId = classID;
+            fillGrades(classIndexId);
+        }
+
         function addNewClass()  {
             //on success close the modal window
             var newClassCode = $("#newClassName").val();
@@ -219,6 +227,7 @@
             user.push(clientSide);
             clearDropdown();
             fillDropdown();
+            setVisibleClassInDropdown(user.length - 1);
         }
 
         function addKeyListeners()  {
