@@ -23,13 +23,13 @@
     <script>
         var user=[],li;function calcluateGrades(){var a=getMarks(),c=getGrades(),b=0,d=0,e=0;if(a.length==c.length)for(d=0;d<a.length;d++)b+=c[d]/100*a[d],e+=c[d];else error();d=b/e*100;isNaN(d)&&(d=0);isNaN(b)&&(b=0);100<e?$("#totalGrade").html("N/A"):$("#totalGrade").html(b.toFixed(2)+"%");$("#currentGrade").html(d.toFixed(2)+"%")}function error(){console.log("A grade or mark is missing")}
         function getMarks(){var a=$(".marks"),c=[],b=0;$.each(a,function(a,e){var f=e.value.trim();""!==f&&(c[b]=parseFloat(f));b++});return c}function getGrades(){var a=$(".grades"),c=[],b=0;$.each(a,function(a,e){var f=e.value.trim();""!==f&&(c[b]=parseFloat(f));b++});return c}
-        function addNewRow(){var a;a='<div class="table-row">                    <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>';a+='<div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>';a+="</div>";$("#table-of-grades").append(a)}function addKeyListeners(){var a=$(".form-control"),c=a[a.length-2],b=!1;a.off("keypress");$(c).keypress(function(){0==b&&(addNewRow(),b=!0,addKeyListeners())})}
+        function addNewRow(){var a;a='<div class="table-row">                    <div class="table-cell"> <input type="number" class="marks form-control" maxlength="8" > </div>';a+='<div class="table-cell"> <input type="number" class="grades form-control" maxlength="8" > </div>';a+="</div>";$("#table-of-grades").append(a)}function addKeyListeners(){var a=$(".form-control"),c=a[a.length-2],b=!1;a.off("keypress");$(c).keypress(function(){0==b&&(addNewRow(),b=!0,addKeyListeners())})}
         $(window).load(function(){addKeyListeners();var a=$(".main-nav");a.on("click",function(c){$(c.target).is(a)&&a.children("ul").toggleClass("is-visible")});$(document).keypress(function(a){13==a.which&&$("#markButton").click()})});function clearTextBoxes(a){$("#"+a).find("input:text").each(function(){$(this).val("")})};
+
     </script>
 </head>
 <body>
 <header role="banner">
-    <!--<div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div>-->
     <div id="cd-logo"><h1 href="/" style="color: ghostwhite; margin-top: auto">GradeCalc.co</h1></div>
     <nav class="main-nav">
         <ul>
@@ -50,32 +50,32 @@
                         <div class="table-cell"> <h4 class="text-center">Weight</h4> </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75.6"> </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75.6"> </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark3" maxlength="8" placeholder="ex 91.23"></div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade3" maxlength="8" placeholder="ex 5"></div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark3" maxlength="8" placeholder="ex 91.23"></div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade3" maxlength="8" placeholder="ex 5"></div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark4" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade4" maxlength="8" > </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark5" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade5" maxlength="8" > </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" id="mark6" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" id="grade6" maxlength="8" > </div>
                     </div>
                     <div class="table-row">
-                        <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>
-                        <div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="marks form-control" maxlength="8" > </div>
+                        <div class="table-cell"> <input type="number" class="grades form-control" maxlength="8" > </div>
                     </div>
                 </div>
                 <div class="table-row">
@@ -94,8 +94,5 @@
     </div>
     &nbsp;
 </div>
-<!--<footer>
-    <h6 class="text-left" style="padding-left: 1%; padding-top: 1%"></h6>
-</footer>-->
 </body>
 </html>

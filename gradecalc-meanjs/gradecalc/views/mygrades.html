@@ -31,12 +31,11 @@
         function addNewClass(){var a=$("#newClassName").val();$.ajax({type:"POST",url:"/addNewClass",dataType:"json",contentType:"application/json; charset=UTF-8",data:JSON.stringify({className:a}),success:function(a){}});$("#myModal").modal("hide");$("#newClassName").val("");user.push({className:a,grades:[],marks:[]});clearDropdown();fillDropdown();setVisibleClassInDropdown(user.length-1)}
         function addKeyListeners(){var a=$(".form-control"),b=a[a.length-3],c=!1;a.off("keypress");$(b).keypress(function(){0==c&&(addNewRow(),c=!0,addKeyListeners())})}$(window).load(function(){addKeyListeners();var a=$(".main-nav");a.on("click",function(b){$(b.target).is(a)&&a.children("ul").toggleClass("is-visible")});$(document).keypress(function(a){13==a.which&&$("#markButton").click()})});function confirmDelete(a){confirm("Are you sure you want to delete this class?")&&deleteClass(a)}
         function deleteClass(a){$.ajax({type:"POST",url:"/deleteclass",dataType:"json",contentType:"application/json; charset=UTF-8",data:JSON.stringify({classIndex:a}),success:function(a){}});user.splice(a,1);clearDropdown();fillDropdown();setVisibleClassInDropdown(0)}
-        function addNewRow(){var a;a='<div class="table-row dynamically-added">                    <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>';a+='<div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>';a+="</div>";$("#table-of-grades").append(a)}function clearTextBoxes(a){$("#"+a).find("input:text").each(function(){$(this).val("")})};
+        function addNewRow(){var a;a='<div class="table-row dynamically-added">                    <div class="table-cell"> <input type="number" class="marks form-control" maxlength="8" > </div>';a+='<div class="table-cell"> <input type="number" class="grades form-control" maxlength="8" > </div>';a+="</div>";$("#table-of-grades").append(a)}function clearTextBoxes(a){$("#"+a).find("input:text").each(function(){$(this).val("")})};
     </script>
 </head>
 <body>
 <header role="banner">
-    <!--<div id="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div>-->
     <div id="cd-logo"><h1 href="/" style="color: ghostwhite; margin-top: auto">GradeCalc.co</h1></div>
     <nav class="main-nav">
         <ul>
@@ -74,32 +73,32 @@
                             <div class="table-cell"> <h4 class="text-center">Weight</h4> </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"><input type="text" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
+                            <div class="table-cell"><input type="number" class="marks form-control" id="mark1" maxlength="8" placeholder="ex 75"> </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade1" maxlength="8" placeholder="ex 50"> </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" id="mark2" maxlength="8"  placeholder="ex 88"> </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade2" maxlength="8"  placeholder="ex 30"> </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark3" maxlength="8" placeholder="ex 91.23"></div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade3" maxlength="8" placeholder="ex 5"></div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" id="mark3" maxlength="8" placeholder="ex 91.23"></div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade3" maxlength="8" placeholder="ex 5"></div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark4" maxlength="8" > </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade4" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" id="mark4" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade4" maxlength="8" > </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark5" maxlength="8" > </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade5" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" id="mark5" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade5" maxlength="8" > </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" id="mark6" maxlength="8" > </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" id="grade6" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" id="mark6" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" id="grade6" maxlength="8" > </div>
                         </div>
                         <div class="table-row">
-                            <div class="table-cell"> <input type="text" class="marks form-control" maxlength="8" > </div>
-                            <div class="table-cell"> <input type="text" class="grades form-control" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="marks form-control" maxlength="8" > </div>
+                            <div class="table-cell"> <input type="number" class="grades form-control" maxlength="8" > </div>
                         </div>
                     </div>
                     <div class="table-row">
@@ -119,9 +118,6 @@
     </div>
     &nbsp;
 </div>
-<!--<footer>
-    <h6 class="text-left" style="padding-left: 1%; padding-top: 1%"></h6>
-</footer>-->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
